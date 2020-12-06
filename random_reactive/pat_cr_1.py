@@ -235,7 +235,7 @@ def run(env):
     plt.xlabel('Unit Time')
     plt.ylabel('Idleness')
     plt.title('Performance')
-    traci.close()
+    traci.close(False)
     plt.show()
     sys.stdout.flush()
 #end of fn

@@ -11,7 +11,7 @@ import optparse
 import time
 import random
 from collections import deque, namedtuple
-import socket
+from firebase import firebase
 
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -25,7 +25,7 @@ sys.path.append(os.path.join('c:', os.sep, 'whatever', 'path', 'to', 'sumo', 'to
 sumoBinary = checkBinary("sumo-gui")
 sumoCmd = [sumoBinary, "-c", "../maps/grid_5_5.sumocfg",
            "--tripinfo-output", "../maps/tripinfo.xml"]
-
+# sumoCmd = [sumoBinary, "-c", "grid_5_5.sumocfg", "--tripinfo-output", "tripinfo.xml"] 
 
 import traci
 
@@ -260,36 +260,24 @@ def run(env):
     plt.xlabel('Unit Time')
     plt.ylabel('Idleness')
     plt.title('Performance')
-    plt.savefig('./cr'+str(cars)+'.png', dpi=100)
-    global s
-    message = 'q'
-    s.send(message.encode('utf-8'))
     traci.close()
-    # plt.show()
+    plt.show()
     sys.stdout.flush()
 #end of fn
 
 if __name__ == '__main__':
-    no_agents = [1,2,3,6,10]
     cars = 6
-    host = socket.gethostname()  # get local machine name
-    port = 8050  # Make sure it's within the > 1024 $$ <65535 range
-    s = socket.socket()
-    s.connect((host, port))
+    firebase = firebase.FirebaseApplication('https://patrolling-7f86a-default-rtdb.firebaseio.com/')
     with open('./routes.txt') as f:
         all_routes = f.read().splitlines()
-    # route_file = open("./routes.txt", "r")
-    # all_routes = route_file.readlines()
-    # print(all_routes[3])
     startings = []
+    random.shuffle(all_routes)
     for i in range(cars):
         startings.append(int(all_routes[i].split('to')[0]))
     # startings = [all_routes.split('to')]
     # print(startings)
     env=rl_env()
-    for k in no_agents:
-        cars = k
-        run(env)
+    run(env)
 #end of main
 
 #end of code
