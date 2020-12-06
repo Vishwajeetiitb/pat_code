@@ -1,0 +1,4 @@
+change path name 
+run get_peaks.py
+run create_folder.py
+run splitruns.py

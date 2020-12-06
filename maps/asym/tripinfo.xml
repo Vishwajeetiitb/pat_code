@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on Saturday 31 October 2020 02:15:38 AM IST by Eclipse SUMO GUI Version 1.7.0
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="./maps/asym/grid_asym.net.xml"/>
+        <route-files value="./maps/asym/simulation.rou.xml"/>
+    </input>
+
+    <output>
+        <netstate-dump value="./maps/asym/netdump.xml"/>
+        <tripinfo-output value="./maps/asym/tripinfo.xml"/>
+    </output>
+
+    <processing>
+        <collision.action value="none"/>
+    </processing>
+
+    <report>
+        <duration-log.disable value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+    <traci_server>
+        <remote-port value="42465"/>
+    </traci_server>
+
+    <gui_only>
+        <gui-settings-file value="./maps/asym/simulation.settings.xml"/>
+    </gui_only>
+
+</configuration>
+-->
+
+<tripinfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/tripinfo_file.xsd">
+</tripinfos>
