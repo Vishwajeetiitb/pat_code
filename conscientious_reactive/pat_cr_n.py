@@ -236,6 +236,7 @@ def run(env):
                 rou_new=str(curr_node[i])+'to'+str(next_state)
                 rou_step.append(rou_curr[i])
                 rou_step.append(rou_new)
+                print(idle[i])
                 # print('next_route: ', rou_step)
                 traci.vehicle.setRoute(vehID = 'veh'+str(i), edgeList = rou_step)
                 rou_curr[i]=rou_new
