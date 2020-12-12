@@ -11,7 +11,6 @@ import optparse
 import time
 import random
 from collections import deque, namedtuple
-from firebase import firebase
 
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -274,7 +273,6 @@ def run(env):
 
 if __name__ == '__main__':
     cars = 6
-    firebase = firebase.FirebaseApplication('https://patrolling-7f86a-default-rtdb.firebaseio.com/')
     with open('./routes.txt') as f:
         all_routes = f.read().splitlines()
     startings = []
