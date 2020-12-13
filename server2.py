@@ -3,6 +3,9 @@ import time
 from pynput.keyboard import Key, Controller
 from pynput.mouse import Button
 from pynput.mouse import Controller as Controller2
+import sys
+x = int(sys.argv[1])
+y = int(sys.argv[2])
 keyboard = Controller()
 mouse = Controller2()
 def server():
@@ -15,6 +18,11 @@ def server():
   s.listen(1)
   client_socket, adress = s.accept()
   print("Connection from: " + str(adress))
+  time.sleep(2)
+  mouse.position = (x,y)
+  mouse.press(Button.left)
+  time.sleep(1)
+  mouse.release(Button.left)
   while True:
     data = client_socket.recv(1024).decode('utf-8')
     if not data:
@@ -32,7 +40,8 @@ def server():
       time.sleep(0.1)
       keyboard.release(Key.alt)
       keyboard.release(Key.f4)
-      time.sleep(10)
+      time.sleep(2)
+      mouse.position = (x,y)
       mouse.press(Button.left)
       time.sleep(1)
       mouse.release(Button.left)

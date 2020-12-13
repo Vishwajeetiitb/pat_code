@@ -11,8 +11,6 @@ import optparse
 import time
 import random
 from collections import deque, namedtuple
-import socket
-
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
     sys.path.append(tools)
@@ -23,9 +21,9 @@ from sumolib import checkBinary
 
 sys.path.append(os.path.join('c:', os.sep, 'whatever', 'path', 'to', 'sumo', 'tools'))
 sumoBinary = checkBinary("sumo-gui")
-sumoCmd = [sumoBinary, "-c", "../maps/grid_5_5.sumocfg",
-           "--tripinfo-output", "../maps/tripinfo.xml"]
-
+sumoCmd = [sumoBinary, "-c", "../../maps/grid_5_5.sumocfg",
+           "--tripinfo-output", "../../maps/tripinfo.xml"]
+# sumoCmd   = [sumoBinary, "-c", "grid_5_5.sumocfg", "--tripinfo-output", "tripinfo.xml"] 
 
 import traci
 
@@ -137,6 +135,8 @@ def CR_patrol(idle, c, env):
     idx= [i for i, j in enumerate(neigh) if j == m]
     # print('idx: ', idx)
     action=random.choice(idx)
+    # print(action)
+    # action = idx[0]
     if action == 3:
         col = max(col-1, 0)
     elif action == 0:
@@ -155,13 +155,6 @@ def CR_patrol(idle, c, env):
 
 def run(env):
     global cars,all_routes
-    # rou_curr = []
-    # for i in range(n):
-    #     rou_curr.append("rou_curr{}".format(i))
-    rou_curr0= "0to"+str(random.choice([1,5]))
-    rou_curr1= "24to"+str(random.choice([19,23]))
-    rou_curr2= "12to"+str(random.choice([11,13, 7,17]))
-    rou_curr3 = "17to"+str(random.choice([16,18, 12,22]))
     rou_curr= all_routes
     env.reset(rou_curr)
     sumo_step=1.0
@@ -180,11 +173,14 @@ def run(env):
     ma_ga=deque(maxlen=3000)
     gav=[]
     ss=[]
+    cloud_array = np.zeros([25,cars,25,1])
+    dead_node = np.array([12])
     while traci.simulation.getMinExpectedNumber()>0:
 
         traci.simulationStep()
         for i in range(cars):
             idle[i]+=1
+            cloud_array[:,i,:]+=1
         global_idl+=1
         for car_no in range(cars):
             edge[car_no] = traci.vehicle.getRoadID('veh'+str(car_no))
@@ -200,14 +196,15 @@ def run(env):
         # print('p_node:',prev_node, 'c_node:',curr_node, 'temp_p: ', temp_p, 'temp_n: ', temp_n)
         # Action decision on new edge
         for i in range(cars):
-            if prev_node[i]!=curr_node[i]:
+            if prev_node[i]!=curr_node[i]:        
                 temp_p[i]=prev_node[i]
                 # print(':::::::::::::to next node for', i, '::::::::::::::::')
 
                 # print('Veh angle: ', traci.vehicle.getAngle('veh'+str(i)))
                 rou_step=[]
                 glo_reward=env.reward_out(global_idl, prev_node[i], i)[0]
-                prev_reward=env.reward_out(idle[i], prev_node[i], i)[0]
+                # print(cloud_array[curr_node[i],i,:],idle[i])
+                prev_reward=env.reward_out(cloud_array[prev_node[i],i,:], prev_node[i], i)[0]
                 # print('reward on prev step: ', prev_reward)
                 v_idle[i][int(prev_node[i])].append(prev_reward.copy())
                 global_v_idl[int(prev_node[i])].append(glo_reward.copy())
@@ -219,17 +216,27 @@ def run(env):
                 cr[i]+=prev_reward
                 #acr=cr/sumo_step
                 #print('acr: ', acr)
-                idle[i][int(prev_node[i])]=0
+                cloud_array[prev_node[i],i,prev_node[i]]=0
+                cloud_array[:,i,prev_node[i]]=0
+                    
+
+                # print()
                 global_idl[int(prev_node[i])]=0
                 # print('agent_', i, 'idleness:\n',idle[i].reshape(5,5))
                 # print('global idleness:\n',global_idl.reshape(5,5))
                 # fa=[[True, True, True, True], [True, True, True, True]]
-                # bool_f, j=forb_action(temp_p, curr_node, temp_n)
+                # bool_f, j=forb_action(    temp_p, curr_node, temp_n)
                 # if j==0 or j==1:
                 #     fa[j]= bool_f
                 # print(fa)
-                action=CR_patrol(idle[i],curr_node[i],env)
-                next_state, reward, action = env.step(action, idle[i], i)
+                if (curr_node[i] not in dead_node):
+                    action=CR_patrol(cloud_array[curr_node[i],i],curr_node[i],env)
+                else :
+                    action=CR_patrol(np.zeros((25,1)),curr_node[i],env)
+                    
+
+    
+                next_state, reward, action = env.step(action, cloud_array[curr_node[i],i], i)
                 temp_n[i]=next_state
                 # print('action: ', action, 'next_state: ', next_state, 'reward: ', reward)
                 #print('curr_node after step: ',curr_node, env.state)
@@ -249,7 +256,7 @@ def run(env):
         prev_node=curr_node.copy()
         #print('curr route: ',rou_curr)
         sumo_step+=1
-        if sumo_step ==20000:
+        if sumo_step ==40000:
             break
 
     plt.plot(ss,ga, "-r", linewidth=0.6,label="Global Average Idleness")
@@ -260,36 +267,23 @@ def run(env):
     plt.xlabel('Unit Time')
     plt.ylabel('Idleness')
     plt.title('Performance')
-    plt.savefig('./cr'+str(cars)+'.png', dpi=100)
-    global s
-    message = 'q'
-    s.send(message.encode('utf-8'))
     traci.close()
-    # plt.show()
+    plt.show()
     sys.stdout.flush()
 #end of fn
 
 if __name__ == '__main__':
-    no_agents = [1,2,3]
     cars = 6
-    host = socket.gethostname()  # get local machine name
-    port = 8050  # Make sure it's within the > 1024 $$ <65535 range
-    s = socket.socket()
-    s.connect((host, port))
-    with open('./routes.txt') as f:
+    with open('../routes.txt') as f:
         all_routes = f.read().splitlines()
-    # route_file = open("./routes.txt", "r")
-    # all_routes = route_file.readlines()
-    # print(all_routes[3])
     startings = []
+    random.shuffle(all_routes)
     for i in range(cars):
         startings.append(int(all_routes[i].split('to')[0]))
     # startings = [all_routes.split('to')]
     # print(startings)
     env=rl_env()
-    for k in no_agents:
-        cars = k
-        run(env)
+    run(env)
 #end of main
 
 #end of code
