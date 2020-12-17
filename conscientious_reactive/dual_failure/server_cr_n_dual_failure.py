@@ -189,7 +189,7 @@ def run(env):
             idle[i]+=1
             cloud_array[:,i,:]+=1
         global_idl+=1
-        for car_no in range(cars):
+        for car_no in range(cars): 
             edge[car_no] = traci.vehicle.getRoadID('veh'+str(car_no))
         #print('veh edge data: ',edge)
         for i, ed in enumerate(edge):
@@ -229,6 +229,7 @@ def run(env):
                 cloud_array[prev_node[i],i,prev_node[i]]=0
                 if (curr_node[i] not in dead_node):
                     cloud_array[:,i,prev_node[i]]=0
+                global_idl[int(prev_node[i])]=0
                 # print('agent_', i, 'idleness:\n',idle[i].reshape(5,5))
                 # print('global idleness:\n',global_idl.reshape(5,5))
                 # fa=[[True, True, True, True], [True, True, True, True]]
