@@ -14,7 +14,7 @@ for subdir, dirs, files in os.walk(rootdir):
         os.system('rm -rf '+path+'grids_img')
         os.system('mkdir '+path+'grids_img')
         fig, axs = plt.subplots(size, size)
-        plt.setp(axs,ylim=(50,500))
+        plt.setp(axs,ylim=(0,500))
         fig.set_size_inches(19.20, 10.80)
         RunPath = path+'run_peaks/'
         xls = pd.ExcelFile(RunPath+'run_peaks.xlsx')
