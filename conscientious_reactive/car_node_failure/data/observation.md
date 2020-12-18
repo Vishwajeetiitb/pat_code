@@ -49,7 +49,7 @@ in comparison to proper connection case, idleness value remains identical
 
 in comparison to proper connection case, idleness value remains identical
 
->corner node is disconnected: asymmetrical with large variations in few case but less in other cases
+>corner node is disconnected: very slight variation but almost identical
 
 >edge node is disconnected: very slight variation but almost identical
 
