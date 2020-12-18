@@ -174,8 +174,8 @@ def run(env):
     gav=[]
     ss=[]
     cloud_array = np.zeros([25,cars,25,1])
-    dead_node = np.array([7]) 
-    absent_node = np.array([17])
+    dead_node = np.array([0, 2, 12]) 
+    # absent_node = np.array([17])
     while traci.simulation.getMinExpectedNumber()>0:
 
         traci.simulationStep()
