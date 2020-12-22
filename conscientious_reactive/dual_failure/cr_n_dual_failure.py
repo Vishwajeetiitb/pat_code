@@ -271,7 +271,7 @@ def run(env):
 #end of fn
 
 if __name__ == '__main__':
-    cars = 6
+    cars = 1
     with open('../routes.txt') as f:
         all_routes = f.read().splitlines()
     startings = []
