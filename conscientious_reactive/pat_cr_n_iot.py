@@ -136,8 +136,8 @@ def CR_patrol(idle, c, env):
     m = max(neigh)
     idx= [i for i, j in enumerate(neigh) if j == m]
     # print('idx: ', idx)
-    action=random.choice(idx)
-    # actionv = idx[0]
+    # action=random.choice(idx)
+    action = idx[0]
     if action == 3:
         col = max(col-1, 0)
     elif action == 0:
@@ -250,7 +250,7 @@ def run(env):
         prev_node=curr_node.copy()
         #print('curr route: ',rou_curr)
         sumo_step+=1
-        if sumo_step ==40000:
+        if sumo_step ==20000:
             break
 
     plt.plot(ss,ga, "-r", linewidth=0.6,label="Global Average Idleness")
@@ -267,12 +267,12 @@ def run(env):
 #end of fn
 
 if __name__ == '__main__':
-    cars = 10
+    cars = 4
     firebase = firebase.FirebaseApplication('https://patrolling-7f86a-default-rtdb.firebaseio.com/')
     with open('./routes.txt') as f:
         all_routes = f.read().splitlines()
     startings = []
-    random.shuffle(all_routes)
+    # random.shuffle(all_routes)
     for i in range(cars):
         startings.append(int(all_routes[i].split('to')[0]))
     # startings = [all_routes.split('to')]

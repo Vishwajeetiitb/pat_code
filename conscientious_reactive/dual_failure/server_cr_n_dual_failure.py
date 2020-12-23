@@ -139,9 +139,9 @@ def CR_patrol(idle, c, env):
     m = max(neigh)
     idx= [i for i, j in enumerate(neigh) if j == m]
     # print('idx: ', idx)
-    action=random.choice(idx)
+    # action=random.choice(idx)
     # print(action)
-    # action = idx[0]
+    action = idx[0]
     if action == 3:
         col = max(col-1, 0)
     elif action == 0:
@@ -307,7 +307,7 @@ if __name__ == '__main__':
     with open('../routes.txt') as f:
         all_routes = f.read().splitlines()
     startings = []
-    random.shuffle(all_routes)
+    # random.shuffle(all_routes)
     print(cars)
     startings = []
     for i in range(cars):
