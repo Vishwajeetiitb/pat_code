@@ -298,7 +298,7 @@ def run(env):
 
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
-    port = 10000  # Make sure it's within the > 1024 $$ <65535 range
+    port = 8000  # Make sure it's within the > 1024 $$ <65535 range
     os.system('rm -rf ' +'./data/cr'+str(cars)+'/'+str(dead_node[0])+'dead/run'+str(run_id)+'/')
     os.system('mkdir '+'./data/cr'+str(cars)+'/'+str(dead_node[0])+'dead/run'+str(run_id)+'/')
     workbook = xlsxwriter.Workbook('./data/cr'+str(cars)+'/'+str(dead_node[0])+'dead/run'+str(run_id)+'/'+'run.xlsx')
