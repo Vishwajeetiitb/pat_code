@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on Thursday 24 December 2020 02:42:26 PM IST by Eclipse SUMO GUI Version 1.8.0
+<!-- generated on Fri 25 Dec 2020 07:53:16 IST by Eclipse SUMO GUI Version 1.8.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
 
     <input>
-        <net-file value="../../maps/grid_5_5_final.net.xml"/>
-        <route-files value="../../maps/simulation.rou.xml"/>
+        <net-file value="../maps/grid_5_5_final.net.xml"/>
+        <route-files value="../maps/simulation.rou.xml"/>
     </input>
 
     <output>
-        <netstate-dump value="../../maps/netdump.xml"/>
-        <tripinfo-output value="../../maps/tripinfo.xml"/>
+        <netstate-dump value="../maps/netdump.xml"/>
+        <tripinfo-output value="../maps/tripinfo.xml"/>
     </output>
 
     <processing>
@@ -23,15 +23,14 @@
     </report>
 
     <traci_server>
-        <remote-port value="39155"/>
+        <remote-port value="55989"/>
     </traci_server>
 
     <gui_only>
-        <gui-settings-file value="../../maps/simulation.settings.xml"/>
+        <gui-settings-file value="../maps/simulation.settings.xml"/>
     </gui_only>
 
 </configuration>
 -->
 
 <tripinfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/tripinfo_file.xsd">
-</tripinfos>
