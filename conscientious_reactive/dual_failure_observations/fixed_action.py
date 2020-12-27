@@ -114,7 +114,7 @@ def eval_met(idle, v_idle,sumo_step, n):
     return avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl
 #end of fn
 
-def CR_patrol(idle, c, env):
+def CR_patrol(idle, c, env): 
 
     row=c//5
     col=c%5
