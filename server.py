@@ -7,7 +7,7 @@ keyboard = Controller()
 mouse = Controller2()
 def server():
   host = socket.gethostname()   # get local machine name
-  port = 10000  # Make sure it's within the > 1024 $$ <65535 range
+  port = 8050  # Make sure it's within the > 1024 $$ <65535 range
 
   s = socket.socket()
   s.bind((host, port))
