@@ -182,6 +182,10 @@ def run(env):
     num_steps = 40000
     cloud_array = np.zeros([25,cars,25,1])
     idle_2d = np.zeros([num_steps, 25])
+<<<<<<< HEAD
+=======
+    absent_node=np.array([27]) #node node failure
+>>>>>>> 0147cb4c48e0640244c33fb4371b049b61d75944
     while traci.simulation.getMinExpectedNumber()>0:
         idle_2d[int(sumo_step)-1] = np.transpose(global_idl)
         traci.simulationStep()
@@ -227,7 +231,11 @@ def run(env):
 
                 # print()
                 cloud_array[prev_node[i],i,prev_node[i]]=0
+<<<<<<< HEAD
                 if (curr_node[i] not in dead_node):
+=======
+                if (curr_node[i] not in absent_node):
+>>>>>>> 0147cb4c48e0640244c33fb4371b049b61d75944
                     cloud_array[:,i,prev_node[i]]=0
                 global_idl[int(prev_node[i])]=0
                 # print('agent_', i, 'idleness:\n',idle[i].reshape(5,5))
