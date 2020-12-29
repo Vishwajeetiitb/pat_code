@@ -13,8 +13,8 @@ from collections import deque, namedtuple
 import socket
 import xlsxwriter
 cars = int(sys.argv[1])
-# dead_node = np.array([int(sys.argv[2])])
-run_id = int(sys.argv[2])
+dead_node = np.array([int(sys.argv[2])])
+run_id = int(sys.argv[3])
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
     sys.path.append(tools)
@@ -158,7 +158,7 @@ def CR_patrol(idle, c, env):
 #end of fn
 
 def run(env):
-    global cars,all_routes, workbook, run_id
+    global cars,all_routes,dead_node, workbook, run_id
     worksheet = workbook.add_worksheet('run'+str(run_id))
     rou_curr= all_routes
     env.reset(rou_curr)
@@ -237,10 +237,10 @@ def run(env):
                 # if j==0 or j==1:
                 #     fa[j]= bool_f
                 # print(fa)
-                # if (curr_node[i] not in dead_node):
-                action=CR_patrol(cloud_array[curr_node[i],i],curr_node[i],env)
-                # else :
-                #     action=CR_patrol(np.zeros((25,1)),curr_node[i],env)
+                if (curr_node[i] not in dead_node):
+                    action=CR_patrol(cloud_array[curr_node[i],i],curr_node[i],env)
+                else :
+                    action=CR_patrol(np.zeros((25,1)),curr_node[i],env)
                 next_state, reward, action = env.step(action, cloud_array[curr_node[i],i], i)
                 temp_n[i]=next_state
                 # print('action: ', action, 'next_state: ', next_state, 'reward: ', reward)
@@ -272,7 +272,7 @@ def run(env):
     plt.xlabel('Unit Time')
     plt.ylabel('Idleness')
     plt.title('Performance')
-    plt.savefig('./data/cr'+str(cars)+'/'+'run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
+    plt.savefig('./data/cr'+str(cars)+'/'+str(dead_node[0])+'dead/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
     peaks = []
     steps = []
     node_id = 0
@@ -299,16 +299,16 @@ def run(env):
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
     port = 8000  # Make sure it's within the > 1024 $$ <65535 range
-    os.system('rm -rf ' +'./data/cr'+str(cars)+'/'+'run'+str(run_id)+'/')
-    os.system('mkdir '+'./data/cr'+str(cars)+'/'+'run'+str(run_id)+'/')
-    workbook = xlsxwriter.Workbook('./data/cr'+str(cars)+'/'+'run'+str(run_id)+'/'+'run.xlsx')
+    os.system('rm -rf ' +'./data/cr'+str(cars)+'/'+str(dead_node[0])+'dead/run'+str(run_id)+'/')
+    os.system('mkdir '+'./data/cr'+str(cars)+'/'+str(dead_node[0])+'dead/run'+str(run_id)+'/')
+    workbook = xlsxwriter.Workbook('./data/cr'+str(cars)+'/'+str(dead_node[0])+'dead/run'+str(run_id)+'/'+'run.xlsx')
     s = socket.socket()
     s.connect((host, port))
     with open('../routes.txt') as f:
         all_routes = f.read().splitlines()
-    startings = []
     # random.shuffle(all_routes)
-    # print(cars)
+    startings = []
+    print(cars)
     startings = []
     for i in range(cars):
         startings.append(int(all_routes[i].split('to')[0]))
