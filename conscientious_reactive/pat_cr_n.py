@@ -251,7 +251,7 @@ def run(env):
         prev_node=curr_node.copy()
         #print('curr route: ',rou_curr)
         sumo_step+=1
-        if sumo_step ==40000:
+        if sumo_step ==20000:
             break
 
     plt.plot(ss,ga, "-r", linewidth=0.6,label="Global Average Idleness")
@@ -268,7 +268,7 @@ def run(env):
 #end of fn
 
 if __name__ == '__main__':
-    cars = 1
+    cars = 2
     firebase = firebase.FirebaseApplication('https://patrolling-7f86a-default-rtdb.firebaseio.com/')
     with open('routes.txt') as f:
         all_routes = f.read().splitlines()

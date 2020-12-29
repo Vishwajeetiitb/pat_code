@@ -136,7 +136,8 @@ def CR_patrol(idle, c, env):
     m = max(neigh)
     idx= [i for i, j in enumerate(neigh) if j == m]
     # print('idx: ', idx)
-    action=random.choice(idx)
+    # action=random.choice(idx)
+    action = idx[0]
     if action == 3:
         col = max(col-1, 0)
     elif action == 0:
@@ -249,7 +250,7 @@ def run(env):
         prev_node=curr_node.copy()
         #print('curr route: ',rou_curr)
         sumo_step+=1
-        if sumo_step ==20000:
+        if sumo_step ==40000:
             break
 
     plt.plot(ss,ga, "-r", linewidth=0.6,label="Global Average Idleness")
@@ -270,7 +271,7 @@ def run(env):
 #end of fn
 
 if __name__ == '__main__':
-    no_agents = [1,2,3]
+    no_agents = [1,2,4,6,10]
     cars = 6
     host = socket.gethostname()  # get local machine name
     port = 8050  # Make sure it's within the > 1024 $$ <65535 range
