@@ -25,7 +25,7 @@ for dead in deads:
 	avg = np.array(avg)
 	std = np.array(std)
 	plt.figure()
-	plt.errorbar(cars, avg, xerr=0.0,yerr=std,capsize=5, elinewidth=1)
+	plt.errorbar(cars, avg, xerr=0.0,yerr=std, elinewidth=1, markeredgewidth=1)
 	plt.show()
 	
 
