@@ -48,7 +48,7 @@ for dead in deads:
 	plt.ylabel("graph idleness")
 	# plt.show()
 	plt.savefig('comparison with dead'+str(dead)+'.png')
-	
+	# epi = 100 change 
 
 
 		
