@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import xlsxwriter
 import numpy as np
 import os
-rootdir ='../data/'
+rootdir ='../dual_failure/data/'
 
 cars = [1,2,4,6,10]
 deads = [0,2,12]
@@ -25,9 +25,8 @@ for dead in deads:
 	avg = np.array(avg)
 	std = np.array(std)
 	plt.figure()
-	plt.errorbar(cars, avg, xerr=0.0,yerr=std, fmt='o', ecolor='g', capthick=0.5)
-	# plt.show()
-	plt.savefig('std'+str(dead)+'.png')
+	plt.errorbar(cars, avg, xerr=0.0,yerr=std, elinewidth=1, markeredgewidth=1)
+	plt.show()
 	
 
 
