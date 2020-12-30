@@ -22,12 +22,15 @@ for dead in deads:
 		graph_idlness = np.mean(instantaneous_node_idleness,axis=1)
 		avg.append(np.mean(graph_idlness))
 		std.append(np.std(graph_idlness))
-	avg = np.array(avg)
-	std = np.array(std)
+	#avg = np.array(avg)
+	#std = np.array(std)
 	plt.figure()
-	plt.errorbar(cars, avg, xerr=0.0,yerr=std, fmt='o', ecolor='g', capthick=0.5)
+	plt.errorbar(cars, avg,yerr=std, ecolor='g', capthick=1.0)
+	plt.title("standard deviation of idleness with varying runs and agents")
+	plt.xlabel("number of agents")
+	plt.ylabel("graph idleness")
 	# plt.show()
-	plt.savefig('std'+str(dead)+'.png')
+	plt.savefig('dead'+str(dead)+'.png')
 	
 
 
