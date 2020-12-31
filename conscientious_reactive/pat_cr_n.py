@@ -23,9 +23,9 @@ from sumolib import checkBinary
 
 sys.path.append(os.path.join('c:', os.sep, 'whatever', 'path', 'to', 'sumo', 'tools'))
 sumoBinary = checkBinary("sumo-gui")
-sumoCmd = [sumoBinary, "-c", "../maps/grid_5_5.sumocfg",
-           "--tripinfo-output", "../maps/tripinfo.xml"]
-# sumoCmd = [sumoBinary, "-c", "grid_5_5.sumocfg", "--tripinfo-output", "tripinfo.xml"] 
+# sumoCmd = [sumoBinary, "-c", "../maps/grid_5_5.sumocfg",
+        #    "--tripinfo-output", "../maps/tripinfo.xml"]
+sumoCmd = [sumoBinary, "-c", "grid_5_5.sumocfg", "--tripinfo-output", "tripinfo.xml"] 
 
 import traci
 
@@ -251,16 +251,16 @@ def run(env):
         prev_node=curr_node.copy()
         #print('curr route: ',rou_curr)
         sumo_step+=1
-        if sumo_step ==20000:
+        if sumo_step ==5000:
             break
 
-    plt.plot(ss,ga, "-r", linewidth=0.6,label="Global Average Idleness")
-    plt.plot(ss,gav, "-b", linewidth=4, label="Global Average Node Visit Idleness")
+    plt.plot(ss,ga, "-r", linewidth=0.6,label="Instantaneous Graph Idleness")
+    # plt.plot(ss,gav, "-b", linewidth=4, label="Global Average Node Visit Idleness")
     plt.legend(loc="lower right")
     up=np.ceil(max(ga)/10)*10
     plt.yticks(np.linspace(0,up,int((up/10)+1), endpoint=True))
-    plt.xlabel('Unit Time')
-    plt.ylabel('Idleness')
+    plt.xlabel('sumo step')
+    plt.ylabel('Instantaneous Graph Idleness')
     plt.title('Performance')
     traci.close()
     plt.show()
@@ -268,7 +268,7 @@ def run(env):
 #end of fn
 
 if __name__ == '__main__':
-    cars = 2
+    cars = 4
     firebase = firebase.FirebaseApplication('https://patrolling-7f86a-default-rtdb.firebaseio.com/')
     with open('routes.txt') as f:
         all_routes = f.read().splitlines()
