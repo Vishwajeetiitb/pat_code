@@ -26,17 +26,16 @@ for dead in deads:
 					visited_node = visited_node[0]
 					if visited_node in node_list:
 						node_list.remove(visited_node)
-						# print(visited_node,node_list)
 				if len(node_list)==0:
 					run_exploration_time.append(step[0])
-					# print('break',step[0])
 					break
 
 		avg.append(np.mean(run_exploration_time))
 		std.append(np.std(run_exploration_time))
 	plt.figure()
-	plt.errorbar(cars, avg,yerr=std, ecolor='g', capthick=1.0)
-	plt.title("standard deviation of idleness with varying runs and agents")
+	plt.plot(cars, avg, 'b--')
+	plt.errorbar(cars, avg,yerr=std, fmt = 'o', ecolor='g', capthick=1.0)
+	plt.title("exploration with varying runs and agents")
 	plt.xlabel("number of agents")
 	plt.ylabel("graph idleness")
 	plt.show()
