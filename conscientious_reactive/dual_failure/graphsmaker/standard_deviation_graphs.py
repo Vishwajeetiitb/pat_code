@@ -25,12 +25,13 @@ for dead in deads:
 	#avg = np.array(avg)
 	#std = np.array(std)
 	plt.figure()
-	plt.errorbar(cars, avg,yerr=std, ecolor='g', capthick=1.0)
+	plt.plot(cars, avg, 'b--')
+	plt.errorbar(cars, avg,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
 	plt.title("standard deviation of idleness with varying runs and agents")
 	plt.xlabel("number of agents")
 	plt.ylabel("graph idleness")
 	# plt.show()
-	plt.savefig('dead'+str(dead)+'.png')
+	plt.savefig('dead'+str(dead)+'.png', dpi = 100)
 	
 
 
