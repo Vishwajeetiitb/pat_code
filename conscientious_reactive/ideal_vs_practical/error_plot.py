@@ -12,6 +12,7 @@ num_runs = 5
 for dead in deads:
 	avg1 = []
 	avg2 = []
+	avg = []
 	# std = []
 	for car in cars:
 		path1 = rootdir1+'cr'+str(car)+'/'+str(dead)+'dead/'
@@ -29,18 +30,16 @@ for dead in deads:
 		instantaneous_node_idleness2.append(np.mean(runs2,axis=1))
 		graph_idlness1 = np.mean(instantaneous_node_idleness1,axis=1)
 		graph_idlness2 = np.mean(instantaneous_node_idleness2,axis=1)
-		avg1.append(np.mean(graph_idlness1))
-		avg2.append(np.mean(graph_idlness2))
+		#avg1.append(np.mean(graph_idlness1))
+		#avg2.append(np.mean(graph_idlness2))
+		avg.append(np.mean(graph_idlness1)-np.mean(graph_idlness2))
 		# std.append(np.std(graph_idlness))
 	#avg = np.array(avg)
-	#std = np.array(std)
+	#std = np.array(std)	
+	print(avg)
 	#avg1 = np.array(avg1)
 	#avg2 = np.array(avg2)
 	plt.figure()
-	# print(avg1)
-	# print(avg2)
-	# plt.errorbar(cars, avg,yerr=std, ecolor='g', capthick=1.0)
-    avg = avg1 - avg2
 	plt.plot(cars, avg,label = 'practical')
 	# plt.plot(cars, avg2, label = 'ideal')
 	plt.legend()
