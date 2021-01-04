@@ -44,23 +44,19 @@ for dead in deads:
 			if len(node_list2)==0:
 				run_exploration_time2.append(step[0])
 				break
-		# print(run_exploration_time2)		
-		avg2.append(np.mean(run_exploration_time2))
-		avg1.append(np.mean(run_exploration_time1))
+		# print(run_exploration_time2)	
+        avg.append(np.mean(run_exploration_time2)-np.mean(run_exploration_time1))	
+		# avg2.append(np.mean(run_exploration_time2))
+		# avg1.append(np.mean(run_exploration_time1))
   
 	plt.figure()
-	plt.plot(cars, avg1, label = "practical")
-	plt.plot(cars, avg2, label = "ideal")
+    plt.plot(cars, avg)
+	# plt.plot(cars, avg1, label = "practical")
+	# plt.plot(cars, avg2, label = "ideal")
 	plt.legend()
 	# plt.errorbar(cars, avg,yerr=std, fmt = 'o', ecolor='g', capthick=1.0)
 	plt.title("ideal vs practical")
 	plt.xlabel("number of agents")
-	plt.ylabel("exploration time")
+	plt.ylabel("exploration time error")
 	#plt.show()
-	plt.savefig('exploredead'+str(dead)+'.png',dpi=100)
-	
-
-
-		
-
-
+	plt.savefig('explore_error'+str(dead)+'.png',dpi=100)
