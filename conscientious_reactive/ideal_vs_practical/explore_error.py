@@ -10,8 +10,8 @@ cars = [1,2,4,6,10]
 deads = [0,2,12]
 num_runs = 5
 for dead in deads:
-	avg1 = []
-	avg2 = []
+	avg = []
+
 	for car in cars:
 		path1 = rootdir1+'cr'+str(car)+'/'+str(dead)+'dead/'
 		path2 = rootdir2
@@ -44,13 +44,13 @@ for dead in deads:
 			if len(node_list2)==0:
 				run_exploration_time2.append(step[0])
 				break
-		# print(run_exploration_time2)	
-        avg.append(np.mean(run_exploration_time2)-np.mean(run_exploration_time1))	
+		# print(run_exploration_time2)		
 		# avg2.append(np.mean(run_exploration_time2))
+		avg.append(np.mean(run_exploration_time2)-np.mean(run_exploration_time1))
 		# avg1.append(np.mean(run_exploration_time1))
   
 	plt.figure()
-    plt.plot(cars, avg)
+	plt.plot(cars, avg)
 	# plt.plot(cars, avg1, label = "practical")
 	# plt.plot(cars, avg2, label = "ideal")
 	plt.legend()

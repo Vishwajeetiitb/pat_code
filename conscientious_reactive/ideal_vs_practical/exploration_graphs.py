@@ -44,7 +44,7 @@ for dead in deads:
 			if len(node_list2)==0:
 				run_exploration_time2.append(step[0])
 				break
-		# print(run_exploration_time2)		
+		print(run_exploration_time2)		
 		avg2.append(np.mean(run_exploration_time2))
 		avg1.append(np.mean(run_exploration_time1))
   
