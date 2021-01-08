@@ -1,5 +1,5 @@
 # RL Environment for Patrolling
-__author__='dikshant'
+__author__='dikshant and vishwajeet'
   
 import numpy as np
 import matplotlib.pyplot as plt
@@ -139,9 +139,8 @@ def CR_patrol(idle, c, env):
     m = max(neigh)
     idx= [i for i, j in enumerate(neigh) if j == m]
     # print('idx: ', idx)
-    # action=random.choice(idx)
+    action=random.choice(idx)
     # print(action)
-    action = idx[0]
     if action == 3:
         col = max(col-1, 0)
     elif action == 0:
@@ -163,6 +162,7 @@ def run(env):
     worksheet = workbook.add_worksheet('run'+str(run_id))
     rou_curr= all_routes
     env.reset(rou_curr)
+    # traci.getIDList()
     sumo_step=1.0
     cr = [0 for i in range(cars)]
     rl_step=1.0
@@ -179,13 +179,9 @@ def run(env):
     ma_ga=deque(maxlen=3000)
     gav=[]
     ss=[]
-    num_steps = 40000
+    num_steps = 4000
     cloud_array = np.zeros([25,cars,25,1])
     idle_2d = np.zeros([num_steps, 25])
-<<<<<<< HEAD
-=======
-    absent_node=np.array([27]) #node node failure
->>>>>>> 0147cb4c48e0640244c33fb4371b049b61d75944
     while traci.simulation.getMinExpectedNumber()>0:
         idle_2d[int(sumo_step)-1] = np.transpose(global_idl)
         traci.simulationStep()
@@ -231,11 +227,7 @@ def run(env):
 
                 # print()
                 cloud_array[prev_node[i],i,prev_node[i]]=0
-<<<<<<< HEAD
                 if (curr_node[i] not in dead_node):
-=======
-                if (curr_node[i] not in absent_node):
->>>>>>> 0147cb4c48e0640244c33fb4371b049b61d75944
                     cloud_array[:,i,prev_node[i]]=0
                 global_idl[int(prev_node[i])]=0
                 # print('agent_', i, 'idleness:\n',idle[i].reshape(5,5))
@@ -259,16 +251,17 @@ def run(env):
                 # print('next_route: ', rou_step)
                 traci.vehicle.setRoute(vehID = 'veh'+str(i), edgeList = rou_step)
                 rou_curr[i]=rou_new
+                if i ==0:
+                    avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(global_idl, global_v_idl,sumo_step, 25)
+                    ma_ga.append(glo_idl)
+                    gav.append(np.mean(ma_ga))
+                    ga.append(glo_idl)
+                    ss.append(sumo_step)
+                    sumo_step+=1
 
-        avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(global_idl, global_v_idl,sumo_step, 25)
-        ma_ga.append(glo_idl)
-        gav.append(np.mean(ma_ga))
-        ga.append(glo_idl)
-        ss.append(sumo_step)
-
+   
         prev_node=curr_node.copy()
         #print('curr route: ',rou_curr)
-        sumo_step+=1
         if sumo_step ==num_steps:
             break
 
@@ -315,7 +308,7 @@ if __name__ == '__main__':
     with open('../routes.txt') as f:
         all_routes = f.read().splitlines()
     startings = []
-    # random.shuffle(all_routes)
+    random.shuffle(all_routes)
     print(cars)
     startings = []
     for i in range(cars):

@@ -2,7 +2,7 @@ import os
 import time
 agents = [1,2,4,6,10]
 deads = [26]
-runs = 1
+runs = 5
 os.system('rm -rf ./data/')
 os.system('mkdir ./data/')
 
