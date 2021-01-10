@@ -39,7 +39,7 @@ for dead in deads:
 	plt.xlabel("number of agents")
 	plt.ylabel("graph idleness")
 	#plt.show()
-	plt.savefig('exploredead'+str(dead)+'_new.png',dpi=100)
+	plt.savefig('exploredead'+str(dead)+'_new_normalized.png',dpi=100)
 	
 
 
