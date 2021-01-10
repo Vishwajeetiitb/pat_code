@@ -20,7 +20,7 @@ for dead in deads:
 			runs[i] = runs[i][5000:][:,1:]
 			instantaneous_node_idleness.append(np.mean(runs[i],axis=1))
 		graph_idlness = np.mean(instantaneous_node_idleness,axis=1)
-		graph_idlness = np.array(graph_idlness*car/25)
+		graph_idlness = np.array(graph_idlness)*car/25
 		avg_norm.append(np.mean(graph_idlness))
 		std_norm.append(np.std(graph_idlness))
 	#avg = np.array(avg)
