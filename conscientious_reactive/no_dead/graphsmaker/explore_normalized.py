@@ -28,8 +28,8 @@ for dead in deads:
 						node_list.remove(visited_node)
 				if len(node_list)==0:
 					run_exploration_time.append(step[0])
-					break
-		run_exploration_time = run_exploration_time*car/25
+					break			
+		run_exploration_time = np.array(run_exploration_time*car/25)
 		avg_norm.append(np.mean(run_exploration_time))
 		std_norm.append(np.std(run_exploration_time))
 	plt.figure()
