@@ -6,7 +6,7 @@ import os
 rootdir ='../data/'
 
 cars = [1,2,4,6,10]
-deads = [0,2,12]
+deads = [26]
 num_runs = 5
 for dead in deads:
 	avg = []
