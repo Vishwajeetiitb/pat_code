@@ -11,6 +11,7 @@ deads = [0,2,12]
 no_deads = [26]
 num_runs = 5
 avg = []
+avg2 = []
 for dead in deads:
 	avg1 = []
 	for car in cars:
@@ -26,15 +27,15 @@ for dead in deads:
 		avg.append(avg1)
 
 for dead in no_deads:
-	avg2 = []
+	
 	for car in cars:
 		path2 = rootdir2+'cr'+str(car)+'/'+str(dead)+'dead/'
 		runs2 = []
 		instantaneous_node_idleness2 = []
 		for i in range(num_runs):
 			runs2.append(np.array(pd.read_excel(pd.ExcelFile(path2+'run'+str(i)+'/run.xlsx'))))
-			runs2 = runs2[0][5000:][:,1:]
-			instantaneous_node_idleness2.append(np.mean(runs2,axis=1))
+			runs2[i] = runs2[i][5000:][:,1:]
+			instantaneous_node_idleness2.append(np.mean(runs2[i],axis=1))
 		graph_idlness2 = np.mean(instantaneous_node_idleness2,axis=1)
 		avg2.append(np.mean(graph_idlness2))
 		# std.append(np.std(graph_idlness))
@@ -45,8 +46,8 @@ for dead in no_deads:
 	
 for dead in deads:
 	plt.figure()
-	# print(avg1)
-	# print(avg2)
+	print(avg)
+	print(avg2)
 	# plt.errorbar(cars, avg,yerr=std, ecolor='g', capthick=1.0)
 	plt.plot(cars, avg[dead],label = 'practical')
 	plt.plot(cars, avg2, label = 'ideal')
