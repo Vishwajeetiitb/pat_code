@@ -16,8 +16,9 @@ for dead in deads:
 		runs = []
 		instantaneous_node_idleness =[]
 		for i in range(num_runs):
+			print(path+'run'+str(i)+'/run.xlsx')
 			runs.append(np.array(pd.read_excel(pd.ExcelFile(path+'run'+str(i)+'/run.xlsx'))))
-			runs[i] = runs[i][5000:][:,1:]
+			runs[i] = runs[i][500:][:,1:]
 			instantaneous_node_idleness.append(np.mean(runs[i],axis=1))
 		graph_idlness = np.mean(instantaneous_node_idleness,axis=1)
 		graph_idlness = np.array(graph_idlness)*car/25

@@ -59,4 +59,4 @@ for dead in deads:
 	plt.xlabel("number of agents")
 	plt.ylabel("exploration time error")
 	#plt.show()
-	plt.savefig('explore_error'+str(dead)+'.png',dpi=100)
+	plt.savefig('explore_error'+str(dead)+'_new.png',dpi=100)

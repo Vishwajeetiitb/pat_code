@@ -22,11 +22,12 @@ for dead in deads:
 		instantaneous_node_idleness1 = []
 		instantaneous_node_idleness2 = []
 		for i in range(num_runs):
+			print(path1+'run'+str(i)+'/run.xlsx')
 			runs1.append(np.array(pd.read_excel(pd.ExcelFile(path1+'run'+str(i)+'/run.xlsx'))))
-			runs1[i] = runs1[i][5000:][:,1:]
+			runs1[i] = runs1[i][500:][:,1:]
 			instantaneous_node_idleness1.append(np.mean(runs1[i],axis=1))
 		runs2.append(np.array(pd.read_excel(pd.ExcelFile(path2+str(car)+'car_run.xlsx'))))
-		runs2 = runs2[0][5000:][:,1:]
+		runs2 = runs2[0][500:][:,1:]
 		instantaneous_node_idleness2.append(np.mean(runs2,axis=1))
 		graph_idlness1 = np.mean(instantaneous_node_idleness1,axis=1)
 		graph_idlness2 = np.mean(instantaneous_node_idleness2,axis=1)
@@ -47,7 +48,7 @@ for dead in deads:
 	plt.xlabel("number of agents")
 	plt.ylabel("difference between ideal and practical")
 	# plt.show()
-	plt.savefig('error'+str(dead)+'.png', dpi =100)
+	plt.savefig('error'+str(dead)+'_new.png', dpi =100)
 	
 
 

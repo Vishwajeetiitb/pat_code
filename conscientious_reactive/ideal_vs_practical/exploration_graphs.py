@@ -57,7 +57,7 @@ for dead in deads:
 	plt.xlabel("number of agents")
 	plt.ylabel("exploration time")
 	#plt.show()
-	plt.savefig('exploredead'+str(dead)+'.png',dpi=100)
+	plt.savefig('exploredead'+str(dead)+'_new.png',dpi=100)
 	
 
 
