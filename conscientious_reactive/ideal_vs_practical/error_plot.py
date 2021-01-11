@@ -12,6 +12,7 @@ no_deads = [26]
 num_runs = 5
 avg = []
 avg2 = []
+new = []
 for dead in deads:
 	avg1 = []
 	for car in cars:
@@ -49,7 +50,9 @@ for dead in range(len(deads)):
 	print(avg)
 	print(avg2)
 	# plt.errorbar(cars, avg,yerr=std, ecolor='g', capthick=1.0)
-	new = avg[dead] - avg2
+	for i in range(len(avg2)):
+		new.append(avg[dead][i]-avg2[i])
+	#new = avg[dead] - avg2
 	plt.plot(cars, new)#,label = 'practical')
 	# plt.plot(cars, avg2, label = 'ideal')
 	plt.legend()
@@ -57,7 +60,7 @@ for dead in range(len(deads)):
 	plt.xlabel("number of agents")
 	plt.ylabel("error in idleness")
 	# plt.show()
-	plt.savefig('comparison with dead'+str(dead)+'_news.png', dpi=100)
+	plt.savefig('error'+str(dead)+'_news.png', dpi=100)
 
 
 		
