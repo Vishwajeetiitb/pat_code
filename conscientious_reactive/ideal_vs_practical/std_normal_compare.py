@@ -23,6 +23,7 @@ for dead in deads:
 			runs1[i] = runs1[i][500:][:,1:]
 			instantaneous_node_idleness1.append(np.mean(runs1[i],axis=1))
 		graph_idlness1 = np.mean(instantaneous_node_idleness1,axis=1)
+		graph_idlness1 = np.array(graph_idlness1)*car/25
 		avg1.append(np.mean(graph_idlness1))
 	avg.append(avg1)
 
@@ -37,6 +38,7 @@ for dead in no_deads:
 			runs2[i] = runs2[i][500:][:,1:]
 			instantaneous_node_idleness2.append(np.mean(runs2[i],axis=1))
 		graph_idlness2 = np.mean(instantaneous_node_idleness2,axis=1)
+		graph_idlness2 = np.array(graph_idlness2)*car/25
 		avg2.append(np.mean(graph_idlness2))
 		# std.append(np.std(graph_idlness))
 	#avg = np.array(avg)
@@ -56,7 +58,7 @@ for dead in range(len(deads)):
 	plt.xlabel("number of agents")
 	plt.ylabel("graph idleness")
 	# plt.show()
-	plt.savefig('comparison with dead'+str(dead)+'_news.png', dpi=100)
+	plt.savefig('comparison with std normalized'+str(dead)+'_new.png', dpi=100)
 
 
 		

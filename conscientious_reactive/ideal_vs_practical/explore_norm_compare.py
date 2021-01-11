@@ -6,7 +6,7 @@ import os
 rootdir1 ='./data/'
 rootdir2 ='./no_dead_data/'
 
-cars = [1,2,4,6,10]
+cars = [2,4,6,10]
 deads = [0,2,12]
 no_deads = [26]
 num_runs = 5
@@ -34,6 +34,7 @@ for dead in deads:
 					print(step[0])
 					run_exploration_time1.append(step[0])
 					break		
+		run_exploration_time1 = np.array(run_exploration_time1)*car/25
 		avg1.append(np.mean(run_exploration_time1))
 	avg.append(avg1)
 for dead in no_deads:
@@ -55,11 +56,12 @@ for dead in no_deads:
 				if len(node_list2)==0:
 					run_exploration_time2.append(step[0])
 					break
+		run_exploration_time2 = np.array(run_exploration_time2)*car/25
 		avg2.append(np.mean(run_exploration_time2))
 
 for dead in range(len(deads)): 
 	plt.figure()
-	print(avg[dead])
+	print(dead)
 	plt.plot(cars, avg[dead], label = "practical")
 	plt.plot(cars, avg2, label = "ideals")
 	plt.legend()
@@ -68,7 +70,7 @@ for dead in range(len(deads)):
 	plt.xlabel("number of agents")
 	plt.ylabel("exploration time")
 	#plt.show()
-	plt.savefig('exploredead'+str(dead)+'_new.png',dpi=100)
+	plt.savefig('exploredead'+str(dead)+'_normalize_new.png',dpi=100)
 	
 
 
