@@ -20,7 +20,7 @@ for dead in deads:
 		instantaneous_node_idleness1 = []
 		for i in range(num_runs):
 			runs1.append(np.array(pd.read_excel(pd.ExcelFile(path1+'run'+str(i)+'/run.xlsx'))))
-			runs1[i] = runs1[i][5000:][:,1:]
+			runs1[i] = runs1[i][500:][:,1:]
 			instantaneous_node_idleness1.append(np.mean(runs1[i],axis=1))
 		graph_idlness1 = np.mean(instantaneous_node_idleness1,axis=1)
 		avg1.append(np.mean(graph_idlness1))
@@ -34,7 +34,7 @@ for dead in no_deads:
 		instantaneous_node_idleness2 = []
 		for i in range(num_runs):
 			runs2.append(np.array(pd.read_excel(pd.ExcelFile(path2+'run'+str(i)+'/run.xlsx'))))
-			runs2[i] = runs2[i][5000:][:,1:]
+			runs2[i] = runs2[i][500:][:,1:]
 			instantaneous_node_idleness2.append(np.mean(runs2[i],axis=1))
 		graph_idlness2 = np.mean(instantaneous_node_idleness2,axis=1)
 		avg2.append(np.mean(graph_idlness2))
@@ -56,7 +56,7 @@ for dead in deads:
 	plt.xlabel("number of agents")
 	plt.ylabel("graph idleness")
 	# plt.show()
-	plt.savefig('comparison with dead'+str(dead)+'.png', dpi=100)
+	plt.savefig('comparison with dead'+str(dead)+'_new.png', dpi=100)
 
 
 		

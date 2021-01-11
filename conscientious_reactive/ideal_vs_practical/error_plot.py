@@ -16,7 +16,7 @@ for dead in deads:
 	# std = []
 	for car in cars:
 		path1 = rootdir1+'cr'+str(car)+'/'+str(dead)+'dead/'
-		path2 = rootdir2
+		path2 = rootdir2+'cr'+str(car)+'/'+str(dead)+'dead/'
 		runs1 = []
 		runs2 = []
 		instantaneous_node_idleness1 = []
@@ -26,7 +26,8 @@ for dead in deads:
 			runs1.append(np.array(pd.read_excel(pd.ExcelFile(path1+'run'+str(i)+'/run.xlsx'))))
 			runs1[i] = runs1[i][500:][:,1:]
 			instantaneous_node_idleness1.append(np.mean(runs1[i],axis=1))
-		runs2.append(np.array(pd.read_excel(pd.ExcelFile(path2+str(car)+'car_run.xlsx'))))
+			
+		runs2.append(np.array(pd.read_excel(pd.ExcelFile(path2+'run'+str(i)+'/run.xlsx'))))
 		runs2 = runs2[0][500:][:,1:]
 		instantaneous_node_idleness2.append(np.mean(runs2,axis=1))
 		graph_idlness1 = np.mean(instantaneous_node_idleness1,axis=1)

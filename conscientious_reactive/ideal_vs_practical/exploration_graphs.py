@@ -6,7 +6,7 @@ import os
 rootdir1 ='./data/'
 rootdir2 ='./no_dead_data/'
 
-cars = [1,2,4,6,10]
+cars = [2,4,6,10]
 deads = [0,2,12]
 no_deads = [26]
 num_runs = 5
@@ -21,6 +21,7 @@ for dead in deads:
 			
 		for i in range(num_runs):
 			node_list1 = [i for i in range(25)]
+			print(path1+'run'+str(i)+'/run.xlsx')
 			runs1.append(np.array(pd.read_excel(pd.ExcelFile(path1+'run'+str(i)+'/run.xlsx'))))
 			runs1[i] = runs1[i][0:][:,:]
 			for step in runs1[i]:
@@ -30,6 +31,7 @@ for dead in deads:
 					if visited_node1 in node_list1:
 						node_list1.remove(visited_node1)
 				if len(node_list1)==0:
+					print(step[0])
 					run_exploration_time1.append(step[0])
 					break		
 		avg1.append(np.mean(run_exploration_time1))
