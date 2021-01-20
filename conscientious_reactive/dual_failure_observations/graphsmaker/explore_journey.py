@@ -4,8 +4,8 @@ import xlsxwriter
 import numpy as np
 import os
 rootdir ='../data/'
-os.system("rm -rf explore_journey")
-os.system("mkdir explore_journey")
+os.system("rm -rf explore_journey2")
+os.system("mkdir explore_journey2")
 cars = [2,4,6,10]
 deads = [0,2,12]
 num_runs = 5
@@ -29,20 +29,23 @@ for dead in deads:
 						node_list.remove(visited_node)
 				if len(node_list)==0:
 					if k ==0:
-						run_exploration_time.append(step[0])
+						if step[0]>500:
+							run_exploration_time.append(step[0])
+							k = k+1
 					else:
 						run_exploration_time.append(step[0]-last_step[0])
-					k = k+1
+						k = k+1	
 					last_step = step
 					node_list = [i for i in range(25)]
 			print(run_exploration_time)
-			plt.figure()
+			# fig=plt.figure()
 			plt.plot(run_exploration_time,  '-o')
 			plt.title("exploration times of single run")
 			plt.xlabel("progress")
 			plt.ylabel("Exploration cycle")
 			# plt.show()
-			plt.savefig('explore_journey/'+str(dead)+'_dead_'+str(car)+'_cars_run'+str(i)+'+.png',dpi=100)
+			plt.savefig('explore_journey2/'+str(dead)+'_dead_'+str(car)+'_cars_run'+str(i)+'.png',dpi=100)
+			plt.close()
 	
 
 
