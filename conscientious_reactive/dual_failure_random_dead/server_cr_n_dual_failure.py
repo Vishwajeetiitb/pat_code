@@ -14,7 +14,8 @@ from collections import deque, namedtuple
 import socket
 import xlsxwriter
 cars = int(sys.argv[1])
-dead_node = np.array([int(sys.argv[2])])
+no_of_failed_devices = int(sys.argv[2])
+dead_node = np.random.choice([i for i in range(25)],no_of_failed_devices)
 run_id = int(sys.argv[3])
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -300,9 +301,9 @@ def run(env):
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
     port = 8000  # Make sure it's within the > 1024 $$ <65535 range
-    os.system('rm -rf ' +'./data/cr'+str(cars)+'/'+str(dead_node[0])+'dead/run'+str(run_id)+'/')
-    os.system('mkdir '+'./data/cr'+str(cars)+'/'+str(dead_node[0])+'dead/run'+str(run_id)+'/')
-    workbook = xlsxwriter.Workbook('./data/cr'+str(cars)+'/'+str(dead_node[0])+'dead/run'+str(run_id)+'/'+'run.xlsx')
+    os.system('rm -rf ' +'./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    os.system('mkdir '+'./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    workbook = xlsxwriter.Workbook('./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
     s = socket.socket()
     s.connect((host, port))
     with open('../routes.txt') as f:

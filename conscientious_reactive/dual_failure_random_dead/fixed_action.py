@@ -1,5 +1,5 @@
 # RL Environment for Patrolling
-__author__='dikshant & vishwajeet'
+__author__='dikshant'
   
 import numpy as np
 import matplotlib.pyplot as plt
@@ -114,7 +114,7 @@ def eval_met(idle, v_idle,sumo_step, n):
     return avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl
 #end of fn
 
-def CR_patrol(idle, c, env):
+def CR_patrol(idle, c, env): 
 
     row=c//5
     col=c%5
@@ -139,9 +139,9 @@ def CR_patrol(idle, c, env):
     m = max(neigh)
     idx= [i for i, j in enumerate(neigh) if j == m]
     # print('idx: ', idx)
-    action=random.choice(idx)
+    # action=random.choice(idx)
     # print(action)
-    # action = idx[0]
+    action = idx[0]
     if action == 3:
         col = max(col-1, 0)
     elif action == 0:
@@ -226,21 +226,16 @@ def run(env):
                     
 
                 # print()
-                cloud_array[prev_node[i],i,prev_node[i]]=0
-                if (curr_node[i] not in dead_node):
-                    cloud_array[:,i,prev_node[i]]=0
+                idle[i][int(prev_node[i])]=0
                 global_idl[int(prev_node[i])]=0
                 # print('agent_', i, 'idleness:\n',idle[i].reshape(5,5))
                 # print('global idleness:\n',global_idl.reshape(5,5))
                 # fa=[[True, True, True, True], [True, True, True, True]]
-                # bool_f, j=forb_action(    temp_p, curr_node, temp_n)
+                # bool_f, j=forb_action(temp_p, curr_node, temp_n)
                 # if j==0 or j==1:
                 #     fa[j]= bool_f
                 # print(fa)
-                if (curr_node[i] not in dead_node):
-                    action=CR_patrol(cloud_array[curr_node[i],i],curr_node[i],env)
-                else :
-                    action=CR_patrol(np.zeros((25,1)),curr_node[i],env)
+                action=CR_patrol(idle[i],curr_node[i],env)
                 next_state, reward, action = env.step(action, cloud_array[curr_node[i],i], i)
                 temp_n[i]=next_state
                 # print('action: ', action, 'next_state: ', next_state, 'reward: ', reward)
@@ -259,9 +254,12 @@ def run(env):
                     ss.append(sumo_step)
                     sumo_step+=1
 
-   
+        
+        
+
         prev_node=curr_node.copy()
         #print('curr route: ',rou_curr)
+        
         if sumo_step ==num_steps:
             break
 
@@ -273,7 +271,7 @@ def run(env):
     plt.xlabel('Unit Time')
     plt.ylabel('Idleness')
     plt.title('Performance')
-    plt.savefig('./data/cr'+str(cars)+'/'+str(dead_node[0])+'dead/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
+    plt.savefig('./data/cr'+str(cars)+'run'+'/'+'run'+str(run_id)+'.png')
     peaks = []
     steps = []
     node_id = 0
@@ -285,30 +283,24 @@ def run(env):
             steps.append(index)
         previous_element = element
         index = index + 1
-    plt.plot(steps, peaks)
+    # plt.plot(steps, peaks)
     for col, data in enumerate(np.transpose(idle_2d)):
         worksheet.write_column(0, col+1, data)
     worksheet.write_column(0, 0, range(num_steps))
-    global s
-    message = 'q'
-    s.send(message.encode('utf-8'))
     traci.close()
-    # plt.show()
+    plt.show()
     sys.stdout.flush()
 #end of fn
 
 if __name__ == '__main__':
-    host = socket.gethostname()  # get local machine name
-    port = 8000  # Make sure it's within the > 1024 $$ <65535 range
-    os.system('rm -rf ' +'./data/cr'+str(cars)+'/'+str(dead_node[0])+'dead/run'+str(run_id)+'/')
-    os.system('mkdir '+'./data/cr'+str(cars)+'/'+str(dead_node[0])+'dead/run'+str(run_id)+'/')
-    workbook = xlsxwriter.Workbook('./data/cr'+str(cars)+'/'+str(dead_node[0])+'dead/run'+str(run_id)+'/'+'run.xlsx')
-    s = socket.socket()
-    s.connect((host, port))
+    os.system('rm -rf ' +'./data/cr'+str(cars)+'run'+'/')
+    os.system('mkdir '+'./data/cr'+str(cars)+'run'+'/')
+    workbook = xlsxwriter.Workbook('./data/cr'+str(cars)+'run'+'/'+'run.xlsx')
+    
     with open('../routes.txt') as f:
         all_routes = f.read().splitlines()
     startings = []
-    random.shuffle(all_routes)
+    # random.shuffle(all_routes)
     print(cars)
     startings = []
     for i in range(cars):
