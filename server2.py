@@ -31,6 +31,11 @@ def server():
     if data == 'q':
       print('From online user: ' + data)
       time.sleep(2)
+      mouse.position = (x,y)
+      mouse.press(Button.left)
+      time.sleep(0.2)
+      mouse.release(Button.left)
+      time.sleep(2)
       keyboard.press(Key.enter)
       time.sleep(2)
       keyboard.release(Key.enter)
