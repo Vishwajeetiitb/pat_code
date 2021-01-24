@@ -10,7 +10,7 @@ keyboard = Controller()
 mouse = Controller2()
 def server():
   host = socket.gethostname()   # get local machine name
-  port = 8080  # Make sure it's within the > 1024 $$ <65535 range
+  port = 8000  # Make sure it's within the > 1024 $$ <65535 range
 
   s = socket.socket()
   s.bind((host, port))
@@ -30,17 +30,22 @@ def server():
     # print('From online user: ' + data)
     if data == 'q':
       print('From online user: ' + data)
-      time.sleep(2)
+      time.sleep(1)
       keyboard.press(Key.enter)
-      time.sleep(0.5)
+      time.sleep(1)
       keyboard.release(Key.enter)
-      time.sleep(2)
+      time.sleep(1)
+      mouse.position = (x,y)
+      mouse.press(Button.left)
+      time.sleep(1)
+      mouse.release(Button.left)
+      time.sleep(1)
       keyboard.press(Key.alt)
       keyboard.press(Key.f4)
-      time.sleep(2)
+      time.sleep(0.1)
       keyboard.release(Key.alt)
       keyboard.release(Key.f4)
-      time.sleep(2)
+      time.sleep(5)
       mouse.position = (x,y)
       mouse.press(Button.left)
       time.sleep(1)
