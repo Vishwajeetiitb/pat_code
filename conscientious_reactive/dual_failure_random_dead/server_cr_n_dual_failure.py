@@ -275,7 +275,6 @@ def run(env):
     plt.ylabel('Idleness')
     plt.title('Performance')
     plt.savefig('./data/cr'+str(cars)+'/'+str(dead_node[0])+'dead/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
-    plt.close()
     peaks = []
     steps = []
     node_id = 0
@@ -287,7 +286,7 @@ def run(env):
             steps.append(index)
         previous_element = element
         index = index + 1
-    plt.plot(steps, peaks)
+    # plt.plot(steps, peaks)
     for col, data in enumerate(np.transpose(idle_2d)):
         worksheet.write_column(0, col+1, data)
     worksheet.write_column(0, 0, range(num_steps))
