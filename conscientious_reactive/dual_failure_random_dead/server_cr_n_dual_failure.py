@@ -180,7 +180,7 @@ def run(env):
     ma_ga=deque(maxlen=3000)
     gav=[]
     ss=[]
-    num_steps = 40
+    num_steps = 4000
     cloud_array = np.zeros([25,cars,25,1])
     idle_2d = np.zeros([num_steps, 25])
     while traci.simulation.getMinExpectedNumber()>0:
