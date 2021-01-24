@@ -180,7 +180,7 @@ def run(env):
     ma_ga=deque(maxlen=3000)
     gav=[]
     ss=[]
-    num_steps = 4000
+    num_steps = 40
     cloud_array = np.zeros([25,cars,25,1])
     idle_2d = np.zeros([num_steps, 25])
     while traci.simulation.getMinExpectedNumber()>0:
@@ -274,7 +274,7 @@ def run(env):
     plt.xlabel('Unit Time')
     plt.ylabel('Idleness')
     plt.title('Performance')
-    plt.savefig('./data/cr'+str(cars)+'/'+str(dead_node[0])+'dead/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
+    plt.savefig('./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
     peaks = []
     steps = []
     node_id = 0
@@ -293,6 +293,7 @@ def run(env):
     global s
     message = 'q'
     s.send(message.encode('utf-8'))
+    time.sleep(0.1)
     traci.close()
     # plt.show()
     sys.stdout.flush()
@@ -300,7 +301,7 @@ def run(env):
 
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
-    port = 8000  # Make sure it's within the > 1024 $$ <65535 range
+    port = 8080  # Make sure it's within the > 1024 $$ <65535 range
     os.system('rm -rf ' +'./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
     os.system('mkdir '+'./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
     workbook = xlsxwriter.Workbook('./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
