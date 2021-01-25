@@ -29,7 +29,8 @@ for dead in deads:
 	#avg = np.array(avg)
 	#std = np.array(std)
 	print(avg)
-	plt.write(cars, avgs, label ="no of device failures ="+str(dead))
+	plt.plot(cars, avg, label ="no of device failures ="+str(dead))
+	plt.draw()
 
 # plt.plot(cars, avg, 'b--')
 # for i in range(len(avgs)):
