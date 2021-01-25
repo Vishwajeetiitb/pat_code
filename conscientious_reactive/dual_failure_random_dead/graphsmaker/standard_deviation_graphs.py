@@ -8,7 +8,9 @@ rootdir ='../data/'
 cars = [1,2,3,4,5,6,7,8,9,10]
 deads = [0,2,4,6,8]
 num_runs = 10
-avgs = []
+# avgs = []
+plt.figure()
+
 for dead in deads:
 	avg = []
 	std = []
@@ -27,11 +29,11 @@ for dead in deads:
 	#avg = np.array(avg)
 	#std = np.array(std)
 	print(avg)
-	avgs = avgs.append(avg)
-plt.figure()
+	plt.write(cars, avgs, label ="no of device failures ="+str(dead))
+
 # plt.plot(cars, avg, 'b--')
-for i in range(len(avgs)):
-	plt.plot(cars, avgs[i], label ="no of device failures ="+str(i*2))
+# for i in range(len(avgs)):
+# 	plt.plot(cars, avgs[i], label ="no of device failures ="+str(i*2))
 # plt.errorbar(cars, avg,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
 plt.title("idleness with varying runs and agents with diff no of failed devices")
 plt.xlabel("number of agents")
