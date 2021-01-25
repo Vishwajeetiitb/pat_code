@@ -26,7 +26,7 @@ for dead in deads:
 		# std.append(np.std(graph_idlness))
 	#avg = np.array(avg)
 	#std = np.array(std)
-	# print(avg)
+	print(avg)
 	avgs = avg.append(avg)
 plt.figure()
 # plt.plot(cars, avg, 'b--')
