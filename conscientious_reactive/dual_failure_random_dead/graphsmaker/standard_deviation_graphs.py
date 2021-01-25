@@ -39,7 +39,7 @@ plt.xlabel("number of agents")
 plt.ylabel("standard deviation in graph idleness")
 plt.legend()
 # plt.show()
-plt.savefig('final.png', dpi = 100)
+plt.savefig('std_deviations.png', dpi = 100)
 # plt.savefig('dead'+str(dead)+'_new.png', dpi = 100)
 	
 
