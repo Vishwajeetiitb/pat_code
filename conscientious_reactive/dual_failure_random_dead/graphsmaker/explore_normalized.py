@@ -33,8 +33,8 @@ for dead in deads:
 		run_exploration_time = np.array(run_exploration_time)*car/25
 		avg_norm.append(np.mean(run_exploration_time))
 		std_norm.append(np.std(run_exploration_time))
-	print(avg)
-	plt.plot(cars, avg, label ="no of device failures ="+str(dead))
+	print(avg_norm)
+	plt.plot(cars, avg_norm, label ="no of device failures ="+str(dead))
 	plt.draw()
 
 	# plt.figure()
