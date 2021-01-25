@@ -31,13 +31,15 @@ for dead in deads:
 plt.figure()
 # plt.plot(cars, avg, 'b--')
 for i in range(len(avgs)):
-	plt.plot(cars, avgs[i])
+	plt.plot(cars, avgs[i], label ="no of dead nodes ="+str(i*2))
 # plt.errorbar(cars, avg,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
 # plt.title("standard deviation of idleness with varying runs and agents")
-# plt.xlabel("number of agents")
-# plt.ylabel("graph idleness")
-plt.show()
-	# plt.savefig('dead'+str(dead)+'_new.png', dpi = 100)
+plt.xlabel("number of agents")
+plt.ylabel("graph idleness")
+plt.legend()
+# plt.show()
+plt.savefig('final.png', dpi = 100)
+# plt.savefig('dead'+str(dead)+'_new.png', dpi = 100)
 	
 
 
