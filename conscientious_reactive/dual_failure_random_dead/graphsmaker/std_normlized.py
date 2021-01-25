@@ -35,6 +35,7 @@ for dead in deads:
 plt.title("normalized idleness with varying runs and agents")
 plt.xlabel("number of agents")
 plt.ylabel("normalized graph idleness")
+plt.legend()
 # plt.show()
 plt.savefig('normalized_final.png', dpi = 100)
 	
