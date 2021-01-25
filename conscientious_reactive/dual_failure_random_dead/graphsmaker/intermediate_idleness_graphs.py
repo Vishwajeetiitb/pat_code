@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import xlsxwriter
 import numpy as np
 import os
-rootdir ='../data/'
+rootdir ='../data_2/'
 
 cars = [1,2,4,6,8,10]
 deads = [0,1,2]
