@@ -15,7 +15,8 @@ import socket
 import xlsxwriter
 cars = int(sys.argv[1])
 no_of_failed_devices = int(sys.argv[2])
-dead_node = np.random.choice([i for i in range(25)],no_of_failed_devices)
+# dead_node = np.random.choice([i for i in range(25)],no_of_failed_devices)
+dead_node = []
 run_id = int(sys.argv[3])
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -183,7 +184,10 @@ def run(env):
     num_steps = 4000
     cloud_array = np.zeros([25,cars,25,1])
     idle_2d = np.zeros([num_steps, 25])
+    check = np.random.randint(1000, 3000)
     while traci.simulation.getMinExpectedNumber()>0:
+        if sumo_step == check:
+            dead_node = np.random.choice([i for i in range(25)],no_of_failed_devices)
         idle_2d[int(sumo_step)-1] = np.transpose(global_idl)
         traci.simulationStep()
         for i in range(cars):
@@ -228,6 +232,7 @@ def run(env):
 
                 # print()
                 cloud_array[prev_node[i],i,prev_node[i]]=0
+                print(dead_node)
                 if (curr_node[i] not in dead_node):
                     cloud_array[:,i,prev_node[i]]=0
                 global_idl[int(prev_node[i])]=0
@@ -274,7 +279,7 @@ def run(env):
     plt.xlabel('Unit Time')
     plt.ylabel('Idleness')
     plt.title('Performance')
-    plt.savefig('./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
+    plt.savefig('./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
     peaks = []
     steps = []
     node_id = 0
@@ -287,8 +292,8 @@ def run(env):
         previous_element = element
         index = index + 1
     # plt.plot(steps, peaks)
-    for col, data in enumerate(np.transpose(idle_2d)):
-        worksheet.write_column(0, col+1, data)
+    for col, data_2 in enumerate(np.transpose(idle_2d)):
+        worksheet.write_column(0, col+1, data_2)
     worksheet.write_column(0, 0, range(num_steps))
     global s
     message = 'q'
@@ -302,9 +307,9 @@ def run(env):
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
     port = 8000  # Make sure it's within the > 1024 $$ <65535 range
-    os.system('rm -rf ' +'./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    os.system('mkdir '+'./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    workbook = xlsxwriter.Workbook('./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
+    os.system('rm -rf ' +'./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    os.system('mkdir '+'./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    workbook = xlsxwriter.Workbook('./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
     s = socket.socket()
     s.connect((host, port))
     with open('../routes.txt') as f:
