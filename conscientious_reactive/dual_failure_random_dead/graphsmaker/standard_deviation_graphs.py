@@ -27,7 +27,7 @@ for dead in deads:
 	#avg = np.array(avg)
 	#std = np.array(std)
 	print(avg)
-	avgs = avg.append(avg)
+	avgs = avgs.append(avg)
 plt.figure()
 # plt.plot(cars, avg, 'b--')
 for i in range(len(avgs)):
