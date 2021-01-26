@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on Saturday 31 October 2020 02:15:38 AM IST by Eclipse SUMO GUI Version 1.7.0
+<!-- generated on Tuesday 26 January 2021 03:45:21 PM IST by Eclipse SUMO GUI Version 1.8.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
 
     <input>
-        <net-file value="./maps/asym/grid_asym.net.xml"/>
-        <route-files value="./maps/asym/simulation.rou.xml"/>
+        <net-file value="../../maps/asymmetric/complex_final.net.xml"/>
+        <route-files value="../../maps/asymmetric/simulation.rou.xml"/>
     </input>
 
     <output>
-        <netstate-dump value="./maps/asym/netdump.xml"/>
-        <tripinfo-output value="./maps/asym/tripinfo.xml"/>
+        <netstate-dump value="../../maps/asymmetric/netdump.xml"/>
+        <tripinfo-output value="../../maps/asymmetric/tripinfo.xml"/>
     </output>
 
     <processing>
@@ -23,11 +23,11 @@
     </report>
 
     <traci_server>
-        <remote-port value="42465"/>
+        <remote-port value="36367"/>
     </traci_server>
 
     <gui_only>
-        <gui-settings-file value="./maps/asym/simulation.settings.xml"/>
+        <gui-settings-file value="../../maps/asymmetric/simulation.settings.xml"/>
     </gui_only>
 
 </configuration>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on Saturday 31 October 2020 01:58:54 AM IST by Eclipse SUMO netedit Version 1.7.0
+<!-- generated on Tuesday 26 January 2021 03:45:13 PM IST by Eclipse SUMO netedit Version 1.8.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
 
     <input>
-        <sumo-net-file value="/home/vishwajeet/Documents/pro..s/prof/patrolling/pat_code/maps/asym.net.xml"/>
+        <sumo-net-file value="/home/vishwajeet/Documents/projects/prof/patrolling/pat_code/maps/asymmetric/complex_final.net.xml"/>
     </input>
 
     <output>
-        <output-file value="/home/vishwajeet/Documents/pro..s/prof/patrolling/pat_code/maps/asym.net.xml"/>
-        <plain-output-prefix value="/home/vishwajeet/Documents/pro..s/prof/patrolling/pat_code/maps/asym/asym"/>
+        <output-file value="/home/vishwajeet/Documents/projects/prof/patrolling/pat_code/maps/asymmetric/complex_final.net.xml"/>
+        <plain-output-prefix value="/home/vishwajeet/Documents/projects/prof/patrolling/pat_code/maps/asymmetric/complex_final"/>
     </output>
 
     <processing>
