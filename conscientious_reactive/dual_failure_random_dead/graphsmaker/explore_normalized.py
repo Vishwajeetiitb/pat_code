@@ -5,14 +5,15 @@ import numpy as np
 import os
 rootdir ='../data/'
 
-cars = [1,2,4,6,10]
-deads = [0,2,12]
-num_runs = 5
+cars = [1,2,3,4,5,6,7,8,9,10]
+deads = [0,2,4,6,8]
+num_runs = 10
+plt.figure()
 for dead in deads:
 	avg_norm = []
 	std_norm = []
 	for car in cars:
-		path = rootdir+'cr'+str(car)+'/'+str(dead)+'dead/'
+		path = rootdir+'cr'+str(car)+'/'+str(dead)+'devices_failed/'
 		runs = []
 		run_exploration_time =[]
 		
@@ -32,14 +33,19 @@ for dead in deads:
 		run_exploration_time = np.array(run_exploration_time)*car/25
 		avg_norm.append(np.mean(run_exploration_time))
 		std_norm.append(np.std(run_exploration_time))
-	plt.figure()
-	plt.plot(cars, avg_norm, 'b--')
-	plt.errorbar(cars, avg_norm,yerr=std_norm, fmt = 'o', ecolor='g', capthick=1.0)
-	plt.title("exploration with varying runs and agents")
-	plt.xlabel("number of agents")
-	plt.ylabel("graph idleness")
-	#plt.show()
-	plt.savefig('exploredead'+str(dead)+'_new_normalized.png',dpi=100)
+	print(avg_norm)
+	plt.plot(cars, avg_norm, label ="no of device failures ="+str(dead))
+	plt.draw()
+
+	# plt.figure()
+	# plt.plot(cars, avg_norm, 'b--')
+	# plt.errorbar(cars, avg_norm,yerr=std_norm, fmt = 'o', ecolor='g', capthick=1.0)
+plt.title("normalized exploration time with varying runs and agents")
+plt.xlabel("number of agents")
+plt.ylabel("normalized exploration time")
+plt.legend()
+#plt.show()
+plt.savefig('normalized_explore.png',dpi=100)
 	
 
 
