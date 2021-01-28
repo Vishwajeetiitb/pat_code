@@ -36,12 +36,12 @@ class rl_env(object):
 
     def __init__(self):
         self.nrow, self.ncol= 5, 5
-        self.stateSpace=np.array([i for i in range(25)])
+        self.stateSpace=np.array([i for i in range(28)])
         self.actionSpace = [0, 1, 2, 3]
         #Action space= {'0': 'North', '1': 'South', '2': 'East', '3': 'West'}
         self.state=0
         self.nA = 4
-        self.nS = 25
+        self.nS = 28
         self.reward=0
 
     def sample(self):
@@ -78,9 +78,9 @@ class rl_env(object):
 #end of class
 
 def eval_met(idle, v_idle,sumo_step, n):
-    avg_v_idl=np.zeros((25,1))
-    max_v_idl=np.zeros((25,1))
-    var_v_idl=np.zeros((25,1))
+    avg_v_idl=np.zeros((28,1))
+    max_v_idl=np.zeros((28,1))
+    var_v_idl=np.zeros((28,1))
     #avg idleness
     for i in range(n):
         if v_idle[i]:
@@ -153,7 +153,7 @@ def run(env):
             print('reward on prev step: ', prev_reward)
             v_idle[int(prev_node)].append(prev_reward.copy())
 
-            avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(idle, v_idle,sumo_step, 25)
+            avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(idle, v_idle,sumo_step, 28)
             print('global avg node visit idleness: ', glo_v_idl, '\nglobal max node visit idleness: ', glo_max_v_idl)
             print('global avg instant idleness: ', glo_idl, '\nglobal max instant idleness: ', glo_max_idl)
 
@@ -181,7 +181,7 @@ def run(env):
             traci.vehicle.setRoute(vehID = 'veh0', edgeList = rou_step)
             rou_curr=rou_new
 
-        avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(idle, v_idle,sumo_step, 25)
+        avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(idle, v_idle,sumo_step, 28)
         ma_ga.append(glo_idl)
         gav.append(np.mean(ma_ga))
         ga.append(glo_idl)
