@@ -15,8 +15,8 @@ import socket
 import xlsxwriter
 cars = int(sys.argv[1])
 no_of_failed_devices = int(sys.argv[2])
-# dead_node = np.random.choice([i for i in range(25)],no_of_failed_devices)
-dead_node = []
+dead_node = np.random.choice([i for i in range(25)],no_of_failed_devices)
+# dead_node = []
 run_id = int(sys.argv[3])
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
@@ -148,10 +148,10 @@ def run(env):
     num_steps = 4000
     cloud_array = np.zeros([28,cars,28,1])
     idle_2d = np.zeros([num_steps, 28])
-    check = np.random.randint(1000, 3000)
+    # check = np.random.randint(1000, 3000)
     while traci.simulation.getMinExpectedNumber()>0:
-        if sumo_step == check:
-            dead_node = np.random.choice([i for i in range(28)],no_of_failed_devices)
+        # if sumo_step == check:
+        # 8)],no_of_failed_devices)
         idle_2d[int(sumo_step)-1] = np.transpose(global_idl)
         traci.simulationStep()
         for i in range(cars):
