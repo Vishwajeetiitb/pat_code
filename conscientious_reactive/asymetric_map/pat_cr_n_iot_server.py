@@ -28,7 +28,7 @@ from sumolib import checkBinary
 
 sys.path.append(os.path.join('c:', os.sep, 'whatever', 'path', 'to', 'sumo', 'tools'))
 sumoBinary = checkBinary("sumo-gui")
-map_path = "././maps/asymmetric/"
+map_path = "../../maps/asymmetric/"
 map_name = "complex_final"
 
 # sumoCmd = [sumoBinary, "-c", "../maps/grid_5_5.sumocfg",
@@ -145,7 +145,7 @@ def run(env):
     ma_ga=deque(maxlen=3000)
     gav=[]
     ss=[]
-    num_steps = 4000
+    num_steps = 40000
     cloud_array = np.zeros([28,cars,28,1])
     idle_2d = np.zeros([num_steps, 28])
     # check = np.random.randint(1000, 3000)

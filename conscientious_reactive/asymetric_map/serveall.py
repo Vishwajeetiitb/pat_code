@@ -8,4 +8,3 @@ print(x,y)
 for i in range(510):
 	print(i)
 	os.system('python3 ../../server2.py '+str(x)+' '+str(y))
-
