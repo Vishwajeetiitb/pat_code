@@ -40,7 +40,7 @@ class rl_env(object):
 
     def __init__(self):
         global cars
-        self.nrow, self.ncol= 5, 5
+        # self.nrow, self.ncol= 5, 5
         self.stateSpace=np.array([i for i in range(28)])
         self.actionSpace = [0, 1, 2, 3]
         #Action space= {'0': 'North', '1': 'South', '2': 'East', '3': 'West'}
@@ -287,7 +287,7 @@ def extract_routes():
 
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
-    port = 8000  # Make sure it's within the > 1024 $$ <65535 range
+    port = 9600  # Make sure it's within the > 1024 $$ <65535 range
     os.system('rm -rf ' +'./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
     os.system('mkdir '+'./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
     workbook = xlsxwriter.Workbook('./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
