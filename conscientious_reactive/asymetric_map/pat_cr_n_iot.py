@@ -23,7 +23,7 @@ from sumolib import checkBinary
 
 sys.path.append(os.path.join('c:', os.sep, 'whatever', 'path', 'to', 'sumo', 'tools'))
 sumoBinary = checkBinary("sumo-gui")
-map_path = "../../maps/asymmetric/"
+map_path = "././maps/asymmetric/"
 map_name = "complex_final"
 
 # sumoCmd = [sumoBinary, "-c", "../maps/grid_5_5.sumocfg",
