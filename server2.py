@@ -52,8 +52,8 @@ def server():
       time.sleep(1)
       mouse.release(Button.left)
       # mouse.move(0,0)
-      client_socket.close()
-      break
+  client_socket.close()
+      # break
 
 
 server()
