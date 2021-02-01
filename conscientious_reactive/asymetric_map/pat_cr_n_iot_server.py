@@ -145,7 +145,7 @@ def run(env):
     ma_ga=deque(maxlen=3000)
     gav=[]
     ss=[]
-    num_steps = 4000
+    num_steps = 40000
     cloud_array = np.zeros([28,cars,28,1])
     idle_2d = np.zeros([num_steps, 28])
     # check = np.random.randint(1000, 3000)
@@ -295,7 +295,7 @@ if __name__ == '__main__':
     s.connect((host, port))
     all_routes = extract_routes()
     startings = []
-    print(all_routes)
+    # print(all_routes)
     random.shuffle(all_routes)
     for i in range(cars):
         startings.append(int(all_routes[i].split('to')[0]))
