@@ -1,7 +1,7 @@
 import os
 import time
-agents = [1,2,4,6,8,10]
-no_fails = [0,2,4,8,10,12, 20, 25]
+agents = [1,2,4]#,6,8,10]
+no_fails = [0]#,2]#,4,8,10,12, 20, 25]
 runs = 5
 os.system('rm -rf ./data_2/')
 os.system('mkdir ./data_2/')

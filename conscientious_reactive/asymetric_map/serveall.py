@@ -5,6 +5,6 @@ with open('./mouse_pose_x.txt') as f:
 with open('./mouse_pose_y.txt') as f:
 	y = int(f.read())
 print(x,y)
-for i in range(510):
+for i in range(5):
 	print(i)
 	os.system('python3 ../../server2.py '+str(x)+' '+str(y))
