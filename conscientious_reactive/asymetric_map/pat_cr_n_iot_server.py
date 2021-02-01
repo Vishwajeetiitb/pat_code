@@ -145,7 +145,7 @@ def run(env):
     ma_ga=deque(maxlen=3000)
     gav=[]
     ss=[]
-    num_steps = 40000
+    num_steps = 4000
     cloud_array = np.zeros([28,cars,28,1])
     idle_2d = np.zeros([num_steps, 28])
     # check = np.random.randint(1000, 3000)
@@ -196,7 +196,7 @@ def run(env):
 
                 # print()
                 cloud_array[prev_node[i],i,prev_node[i]]=0
-                print(dead_node)
+                # print(dead_node)
                 if (curr_node[i] not in dead_node):
                     cloud_array[:,i,prev_node[i]]=0
                 global_idl[int(prev_node[i])]=0
@@ -287,7 +287,7 @@ def extract_routes():
 
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
-    port = 9600  # Make sure it's within the > 1024 $$ <65535 range
+    port = 8000  # Make sure it's within the > 1024 $$ <65535 range
     os.system('rm -rf ' +'./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
     os.system('mkdir '+'./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
     workbook = xlsxwriter.Workbook('./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
