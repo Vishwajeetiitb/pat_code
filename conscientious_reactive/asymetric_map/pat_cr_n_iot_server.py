@@ -15,7 +15,7 @@ import socket
 import xlsxwriter
 cars = int(sys.argv[1])
 no_of_failed_devices = int(sys.argv[2])
-dead_node = np.random.choice([i for i in range(25)],no_of_failed_devices)
+dead_node = np.random.choice([i for i in range(28)],no_of_failed_devices)
 # dead_node = []
 run_id = int(sys.argv[3])
 if 'SUMO_HOME' in os.environ:
