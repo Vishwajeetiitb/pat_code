@@ -1,17 +1,17 @@
 import os
 import time
-agents = [1,2,4,6,8,10]
+agents = [1,2]#,4,6,8,10]
 no_fails = [0]#, 4, 10, 14, 21, 28]
 runs = 5
-os.system('rm -rf ./data_2/')
-os.system('mkdir ./data_2/')
+os.system('rm -rf ./data/')
+os.system('mkdir ./data/')
 
 for i in agents:
-	os.system('rm -rf ./data_2/cr'+str(i)+'/')
-	os.system('mkdir ./data_2/cr'+str(i)+'/')
+	os.system('rm -rf ./data/cr'+str(i)+'/')
+	os.system('mkdir ./data/cr'+str(i)+'/')
 	for fail_no in no_fails:
-		os.system('rm -rf ./data_2/cr'+str(i)+'/'+str(fail_no)+'devices_failed')
-		os.system('mkdir  ./data_2/cr'+str(i)+'/'+str(fail_no)+'devices_failed')
+		os.system('rm -rf ./data/cr'+str(i)+'/'+str(fail_no)+'devices_failed')
+		os.system('mkdir  ./data/cr'+str(i)+'/'+str(fail_no)+'devices_failed')
 for no_agents in agents:
 	for fail_no in no_fails:
 		for run_id in range(runs):

@@ -23,7 +23,7 @@ from sumolib import checkBinary
 
 sys.path.append(os.path.join('c:', os.sep, 'whatever', 'path', 'to', 'sumo', 'tools'))
 sumoBinary = checkBinary("sumo-gui")
-map_path = "././maps/asymmetric/"
+map_path = "../../maps/asymmetric/"
 map_name = "complex_final"
 
 # sumoCmd = [sumoBinary, "-c", "../maps/grid_5_5.sumocfg",
@@ -205,17 +205,25 @@ def run(env):
                 # print('next_route: ', rou_step)
                 traci.vehicle.setRoute(vehID = 'veh'+str(i), edgeList = rou_step)
                 rou_curr[i]=rou_new
+                if i==0:
+                    avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(global_idl, global_v_idl,sumo_step, 28)
+                    ma_ga.append(glo_idl)
+                    gav.append(np.mean(ma_ga))
+                    ga.append(glo_idl)
+                    ss.append(sumo_step)
+                    sumo_step+=1
 
-        avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(global_idl, global_v_idl,sumo_step, 28)
-        ma_ga.append(glo_idl)
-        gav.append(np.mean(ma_ga))
-        ga.append(glo_idl)
-        ss.append(sumo_step)
+        # avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(global_idl, global_v_idl,sumo_step, 28)
+        # ma_ga.append(glo_idl)
+        # gav.append(np.mean(ma_ga))
+        # ga.append(glo_idl)
+        # ss.append(sumo_step)
 
         prev_node=curr_node.copy()
         #print('curr route: ',rou_curr)
-        sumo_step+=1
-        if sumo_step ==20000:
+        # sumo_step+=1s
+        print(sumo_step)
+        if sumo_step ==2000:
             break
 
     plt.plot(ss,ga, "-r", linewidth=0.6,label="Global Average Idleness")
