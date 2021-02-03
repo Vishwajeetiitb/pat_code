@@ -145,7 +145,7 @@ def run(env):
     ma_ga=deque(maxlen=3000)
     gav=[]
     ss=[]
-    num_steps = 20000
+    num_steps = 120
     cloud_array = np.zeros([28,cars,28,1])
     idle_2d = np.zeros([num_steps, 28])
     # check = np.random.randint(1000, 3000)
@@ -221,12 +221,13 @@ def run(env):
                 # print('next_route: ', rou_step)
                 traci.vehicle.setRoute(vehID = 'veh'+str(i), edgeList = rou_step)
                 rou_curr[i]=rou_new
-        avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(global_idl, global_v_idl,sumo_step, 28)
-        ma_ga.append(glo_idl)
-        gav.append(np.mean(ma_ga))
-        ga.append(glo_idl)
-        ss.append(sumo_step)
-        sumo_step+=1
+                if i==0:
+                    avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(global_idl, global_v_idl,sumo_step, 28)
+                    ma_ga.append(glo_idl)
+                    gav.append(np.mean(ma_ga))
+                    ga.append(glo_idl)
+                    ss.append(sumo_step)
+                    sumo_step+=1
 
    
         prev_node=curr_node.copy()
@@ -242,7 +243,7 @@ def run(env):
     plt.xlabel('Unit Time')
     plt.ylabel('Idleness')
     plt.title('Performance')
-    plt.savefig('./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
+    plt.savefig('./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
     peaks = []
     steps = []
     node_id = 0
@@ -255,8 +256,8 @@ def run(env):
         previous_element = element
         index = index + 1
     # plt.plot(steps, peaks)
-    for col, data_2 in enumerate(np.transpose(idle_2d)):
-        worksheet.write_column(0, col+1, data_2)
+    for col, data in enumerate(np.transpose(idle_2d)):
+        worksheet.write_column(0, col+1, data)
     worksheet.write_column(0, 0, range(num_steps))
     global s
     message = 'q'
@@ -288,9 +289,9 @@ def extract_routes():
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
     port = 8000  # Make sure it's within the > 1024 $$ <65535 range
-    os.system('rm -rf ' +'./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    os.system('mkdir '+'./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    workbook = xlsxwriter.Workbook('./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
+    os.system('rm -rf ' +'./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    os.system('mkdir '+'./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    workbook = xlsxwriter.Workbook('./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
     s = socket.socket()
     s.connect((host, port))
     all_routes = extract_routes()
