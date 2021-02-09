@@ -219,7 +219,7 @@ def run(env):
                 rou_step.append(rou_curr[i])
                 rou_step.append(rou_new)
                 # print('next_route: ', rou_step)
-                traci.vehicle.setRoute(vehID = 'veh'+str(i), edgeList = rou_step)
+                traci.vehicle.setRoute(vehID = 'veh'+str(i), edgeList = all_routes)
                 rou_curr[i]=rou_new
                 if i==0:
                     avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(global_idl, global_v_idl,sumo_step, 28)
