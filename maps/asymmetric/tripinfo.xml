@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on Tuesday 09 February 2021 06:10:16 PM IST by Eclipse SUMO GUI Version 1.8.0
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="../../maps/asymmetric/complex_final.net.xml"/>
+        <route-files value="../../maps/asymmetric/simulation.rou.xml"/>
+    </input>
+
+    <output>
+        <netstate-dump value="../../maps/asymmetric/netdump.xml"/>
+        <tripinfo-output value="../../maps/asymmetric/tripinfo.xml"/>
+    </output>
+
+    <processing>
+        <collision.action value="none"/>
+    </processing>
+
+    <report>
+        <duration-log.disable value="true"/>
+        <no-step-log value="true"/>
+    </report>
+
+    <traci_server>
+        <remote-port value="53929"/>
+    </traci_server>
+
+    <gui_only>
+        <gui-settings-file value="../../maps/asymmetric/simulation.settings.xml"/>
+    </gui_only>
+
+</configuration>
+-->
+
+<tripinfos xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/tripinfo_file.xsd">
+</tripinfos>
