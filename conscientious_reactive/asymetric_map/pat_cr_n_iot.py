@@ -256,7 +256,7 @@ def extract_routes():
 #end of fn
 
 if __name__ == '__main__':
-    cars = 4
+    cars = 1
     adj_nodes = []
     all_routes = extract_routes()
     startings = []
