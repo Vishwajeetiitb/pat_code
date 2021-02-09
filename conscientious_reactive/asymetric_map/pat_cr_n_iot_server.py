@@ -16,6 +16,7 @@ import xlsxwriter
 cars = int(sys.argv[1])
 no_of_failed_devices = int(sys.argv[2])
 dead_node = np.random.choice([i for i in range(28)],no_of_failed_devices)
+print(dead_node)
 # dead_node = []
 run_id = int(sys.argv[3])
 if 'SUMO_HOME' in os.environ:
@@ -197,8 +198,9 @@ def run(env):
                 # print()
                 cloud_array[prev_node[i],i,prev_node[i]]=0
                 # print(dead_node)
-                if (curr_node[i] not in dead_node):
-                    cloud_array[:,i,prev_node[i]]=0
+                # if (curr_node[i] not in dead_node):
+                #     cloud_array[:,i,prev_node[i]]=0
+                cloud_array[:,:,prev_node[i]]=0
                 global_idl[int(prev_node[i])]=0
                 # print('agent_', i, 'idleness:\n',idle[i].reshape(5,5))
                 # print('global idleness:\n',global_idl.reshape(5,5))
@@ -218,8 +220,9 @@ def run(env):
                 rou_new=str(curr_node[i])+'to'+str(next_state)
                 rou_step.append(rou_curr[i])
                 rou_step.append(rou_new)
-                # print('next_route: ', rou_step)
-                traci.vehicle.setRoute(vehID = 'veh'+str(i), edgeList = all_routes)
+
+                print('next_route: ', rou_step)
+                traci.vehicle.setRoute(vehID = 'veh'+str(i), edgeList = rou_step)
                 rou_curr[i]=rou_new
                 if i==0:
                     avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(global_idl, global_v_idl,sumo_step, 28)
@@ -296,7 +299,7 @@ if __name__ == '__main__':
     s.connect((host, port))
     all_routes = extract_routes()
     startings = []
-    # print(all_routes)
+    print(all_routes)
     random.shuffle(all_routes)
     for i in range(cars):
         startings.append(int(all_routes[i].split('to')[0]))
