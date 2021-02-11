@@ -258,13 +258,13 @@ def run(env):
         if sumo_step ==20000:
             break
 
-    plt.plot(ss,ga, "-r", linewidth=0.6,label="Global Average Idleness")
-    plt.plot(ss,gav, "-b", linewidth=4, label="Global Average Node Visit Idleness")
+    plt.plot(ss,ga, "-r", linewidth=0.6)#,label="Instantaneous Graph Idleness")
+    # plt.plot(ss,gav, "-b", linewidth=4, label="Global Average Node Visit Idleness")
     plt.legend(loc="lower right")
     up=np.ceil(max(ga)/10)*10
     plt.yticks(np.linspace(0,up,int((up/10)+1), endpoint=True))
-    plt.xlabel('Unit Time')
-    plt.ylabel('Idleness')
+    plt.xlabel('sumo step')
+    plt.ylabel('Instantaneous Graph Idleness')
     plt.title('Performance')
     traci.close()
     plt.show()
