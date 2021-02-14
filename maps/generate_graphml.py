@@ -89,7 +89,7 @@ with codecs.open(options.inFile_edg, 'r', 'utf-8') as f:
             distance = np.sqrt((p2[0]-p1[0])**2 + (p2[1]-p1[1])**2)
             G.add_edge(from_key, to_key, name=id_val, length = float(distance))
           else:
-            distance = float(e_distance (x,y
+            distance = float(e_distance (x,y))
             G.add_edge(from_key, to_key, name=id_val, length = distance)		
 		
 		
@@ -105,5 +105,5 @@ f.close()
 #nx.draw(G,pos=pos,with_labels=True)
 #plt.show()
 nx.write_graphml(G, options.outFile)
-print "Sucess.........."
+print("Sucess..........")
 
