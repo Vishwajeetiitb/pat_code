@@ -7,10 +7,6 @@
   <output>
     <netstate-dump value="netdump.xml"/>
   </output>
-  <time>
-      <begin value="0"/>
-      <end value="200"/>
-  </time>
   <processing>
     <collision.action value = "none"/>
   </processing>

@@ -1,4 +1,4 @@
-cimport os
+import os
 import optparse
 import codecs
 import networkx as nx
