@@ -16,7 +16,7 @@ import xlsxwriter
 cars = int(sys.argv[1])
 no_of_failed_devices = int(sys.argv[2])
 dead_node = np.random.choice([i for i in range(28)],no_of_failed_devices)
-print(dead_node)
+# print(dead_node)
 # dead_node = []
 run_id = int(sys.argv[3])
 if 'SUMO_HOME' in os.environ:
@@ -221,7 +221,7 @@ def run(env):
                 rou_step.append(rou_curr[i])
                 rou_step.append(rou_new)
 
-                print('next_route: ', rou_step)
+                # print('next_route: ', rou_step)
                 traci.vehicle.setRoute(vehID = 'veh'+str(i), edgeList = rou_step)
                 rou_curr[i]=rou_new
                 if i==0:
@@ -299,7 +299,7 @@ if __name__ == '__main__':
     s.connect((host, port))
     all_routes = extract_routes()
     startings = []
-    print(all_routes)
+    # print(all_routes)
     random.shuffle(all_routes)
     for i in range(cars):
         startings.append(int(all_routes[i].split('to')[0]))
