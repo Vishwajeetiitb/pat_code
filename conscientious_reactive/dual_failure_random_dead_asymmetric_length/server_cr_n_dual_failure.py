@@ -180,7 +180,7 @@ def run(env):
     ma_ga=deque(maxlen=3000)
     gav=[]
     ss=[]
-    num_steps = 1500
+    num_steps = 3500
     cloud_array = np.zeros([25,cars,25,1])
     idle_2d = np.zeros([num_steps, 25])
     # check = np.random.randint(1000, 3000)
