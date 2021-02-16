@@ -5,9 +5,9 @@ import numpy as np
 import os
 rootdir ='../data/'
 
-cars = [1,2,3,4,5,6,7,8,9,10]
-deads = [0,2,4,6,8]
-num_runs = 10
+cars = [1, 2, 4, 5, 6, 7, 8, 10, 12]
+deads = [0,5,12,20,25]
+num_runs = 8
 plt.figure()
 
 for dead in deads:
@@ -18,7 +18,7 @@ for dead in deads:
 		runs = []
 		instantaneous_node_idleness =[]
 		for i in range(num_runs):
-			print(path+'run'+str(i)+'/run.xlsx')
+			# print(path+'run'+str(i)+'/run.xlsx')
 			runs.append(np.array(pd.read_excel(pd.ExcelFile(path+'run'+str(i)+'/run.xlsx'))))
 			runs[i] = runs[i][500:][:,1:]
 			instantaneous_node_idleness.append(np.mean(runs[i],axis=1))
