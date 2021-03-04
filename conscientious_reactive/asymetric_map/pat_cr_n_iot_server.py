@@ -146,7 +146,7 @@ def run(env):
     ma_ga=deque(maxlen=3000)
     gav=[]
     ss=[]
-    num_steps = 1500
+    num_steps = 40000
     cloud_array = np.zeros([28,cars,28,1])
     idle_2d = np.zeros([num_steps, 28])
     # check = np.random.randint(1000, 3000)
@@ -223,13 +223,13 @@ def run(env):
                 # print('next_route: ', rou_step)
                 traci.vehicle.setRoute(vehID = 'veh'+str(i), edgeList = rou_step)
                 rou_curr[i]=rou_new
-                if i==0:
-                    avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(global_idl, global_v_idl,sumo_step, 28)
-                    ma_ga.append(glo_idl)
-                    gav.append(np.mean(ma_ga))
-                    ga.append(glo_idl)
-                    ss.append(sumo_step)
-                    sumo_step+=1
+                
+        avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(global_idl, global_v_idl,sumo_step, 28)
+        ma_ga.append(glo_idl)
+        gav.append(np.mean(ma_ga))
+        ga.append(glo_idl)
+        ss.append(sumo_step)
+        sumo_step+=1
 
    
         prev_node=curr_node.copy()
