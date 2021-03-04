@@ -126,7 +126,7 @@ def CR_patrol(idle, c, env):
 #end of fn
 
 def run(env):
-    global cars,all_routes,dead_node, workbook, run_id
+    global cars,all_routes,dead_node, workbook, run_id, adj_nodes
     worksheet = workbook.add_worksheet('run'+str(run_id))
     rou_curr= all_routes
     env.reset(rou_curr)
@@ -208,10 +208,14 @@ def run(env):
                 # if j==0 or j==1:
                 #     fa[j]= bool_f
                 # print(fa)
+                print("current node ",curr_node[i],"dead_node ",dead_node)
                 if (curr_node[i] not in dead_node):
+                    print("yo") 
                     action=CR_patrol(cloud_array[curr_node[i],i],curr_node[i],env)
                 else :
-                    action=CR_patrol(np.zeros((28,1)),curr_node[i],env)
+                    all_routes = extract_routes()
+                    adj_nodes = [s.split("to")[1] for s in all_routes if s.startswith(str(curr_node[i])+"to")]
+                    action= int(random.choice(adj_nodes))
                 next_state, reward, action = env.step(action, cloud_array[curr_node[i],i], i)
                 temp_n[i]=next_state
                 # print('action: ', action, 'next_state: ', next_state, 'reward: ', reward)
