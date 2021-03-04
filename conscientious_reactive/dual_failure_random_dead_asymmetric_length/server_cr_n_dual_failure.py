@@ -315,7 +315,7 @@ if __name__ == '__main__':
         all_routes = f.read().splitlines()
     startings = []
     random.shuffle(all_routes)
-    print(cars)
+    # print(cars)
     startings = []
     for i in range(cars):
         startings.append(int(all_routes[i].split('to')[0]))
