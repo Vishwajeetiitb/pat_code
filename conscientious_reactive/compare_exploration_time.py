@@ -37,7 +37,7 @@ for dead in deads:
 	print(avg)
 	plt.plot(cars, avg, 'g-', label ="no of device failures ="+str(dead)+"for equal length")
 	plt.draw()
-or dead in deads:
+for dead in deads:
 	avg = []
 	std = []
 	for car in cars:
