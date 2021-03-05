@@ -13,6 +13,8 @@ def server():
   port = 8060  # Make sure it's within the > 1024 $$ <65535 range
 
   s = socket.socket()
+  s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
   s.bind((host, port))
 
   s.listen(1)
