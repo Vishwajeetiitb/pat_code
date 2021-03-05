@@ -27,7 +27,7 @@ for dead in deads:
 		avg.append(np.mean(graph_idlness))
 		# std.append(np.std(graph_idlness))
 	print(avg)
-	plt.plot(cars, avg, label ="no of device failures ="+str(dead)+"for equal length")
+	plt.plot(cars, avg, 'g-',label ="no of device failures ="+str(dead)+"for equal length")
 	plt.draw()
 
 for dead in deads:
@@ -46,7 +46,7 @@ for dead in deads:
 		avg.append(np.mean(graph_idlness))
 		# std.append(np.std(graph_idlness))
 	print(avg)
-	plt.plot(cars, avg, label ="no of device failures ="+str(dead)+"for varying length")
+	plt.plot(cars, avg,'b--', label ="no of device failures ="+str(dead)+"for varying length")
 	plt.draw()
 # plt.plot(cars, avg, 'b--')
 # for i in range(len(avgs)):
