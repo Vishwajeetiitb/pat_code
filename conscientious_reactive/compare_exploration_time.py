@@ -35,7 +35,7 @@ for dead in deads:
 		avg.append(np.mean(run_exploration_time))
 		std.append(np.std(run_exploration_time))
 	print(avg)
-	plt.plot(cars, avg, 'g-', label ="no of device failures ="+str(dead)+"for equal length")
+	plt.plot(cars, avg, '-', label ="no of device failures ="+str(dead)+" for equal length")
 	plt.draw()
 for dead in deads:
 	avg = []
@@ -62,7 +62,7 @@ for dead in deads:
 		avg.append(np.mean(run_exploration_time))
 		std.append(np.std(run_exploration_time))
 	print(avg)
-	plt.plot(cars, avg, 'b--',label ="no of device failures ="+str(dead)+"for varying length")
+	plt.plot(cars, avg, '--',label ="no of device failures ="+str(dead)+" for varying length")
 	plt.draw()
 # plt.plot(cars, avg, 'b--')
 # plt.errorbar(cars, avg,yerr=std, fmt = 'o', ecolor='g', capthick=1.0)
