@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import xlsxwriter
 import numpy as np
 import os
-rootdir ='/home/arms03/Documents/patrolling_vishwajeet_dikshant/pat_code/conscientious_reactive/dual_failure_random_dead/data_3/'
+rootdir1 ='/home/arms03/Documents/patrolling_vishwajeet_dikshant/pat_code/conscientious_reactive/dual_failure_random_dead/data_3/'
 rootdir2 = '/home/arms03/Documents/patrolling_vishwajeet_dikshant/pat_code/conscientious_reactive/dual_failure_random_dead_asymmetric_length/data/'
 
 cars =  [1, 2, 4, 5, 6, 7, 8, 10, 12]
