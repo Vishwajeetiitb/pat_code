@@ -7,7 +7,7 @@ rootdir1 ='/home/arms03/Documents/patrolling_vishwajeet_dikshant/pat_code/consci
 rootdir2 = '/home/arms03/Documents/patrolling_vishwajeet_dikshant/pat_code/conscientious_reactive/dual_failure_random_dead_asymmetric_length/data/'
 
 cars = [1, 2, 4, 5, 6, 7, 8, 10, 12]
-deads = [0,5,12,20,25]
+deads = [0,12,25]
 num_runs = 8
 plt.figure()
 for dead in deads:
