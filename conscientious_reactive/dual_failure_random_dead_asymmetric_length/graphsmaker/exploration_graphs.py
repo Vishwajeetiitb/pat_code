@@ -5,9 +5,9 @@ import numpy as np
 import os
 rootdir ='../data/'
 
-cars = [1,2,3,4,5,6,7,8,9,10]
-deads = [0,2,4,6,8]
-num_runs = 10
+cars = [1, 2, 4, 5, 6, 7, 8, 10, 12]
+deads = [0,5,12,20,25]
+num_runs = 8
 plt.figure()
 for dead in deads:
 	avg = []
@@ -39,12 +39,12 @@ for dead in deads:
 
 # plt.plot(cars, avg, 'b--')
 # plt.errorbar(cars, avg,yerr=std, fmt = 'o', ecolor='g', capthick=1.0)
-plt.title("exploration time with varying runs and agents with diff no of failed devices")
+plt.title("exploration time with diff no of failed devices")
 plt.xlabel("number of agents")
 plt.ylabel("exploration time")
 plt.legend()
 #plt.show()
-plt.savefig('exploredead'+str(dead)+'_new.png',dpi=100)
+plt.savefig('exploredead'+'new.png',dpi=100)
 	
 
 

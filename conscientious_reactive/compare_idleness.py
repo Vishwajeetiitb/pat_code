@@ -27,7 +27,7 @@ for dead in deads:
 		avg.append(np.mean(graph_idlness))
 		# std.append(np.std(graph_idlness))
 	print(avg)
-	plt.plot(cars, avg, label ="no of device failures ="+str(dead))
+	plt.plot(cars, avg, label ="no of device failures ="+str(dead)+"for equal length")
 	plt.draw()
 
 for dead in deads:
@@ -46,13 +46,13 @@ for dead in deads:
 		avg.append(np.mean(graph_idlness))
 		# std.append(np.std(graph_idlness))
 	print(avg)
-	plt.plot(cars, avg, label ="no of device failures ="+str(dead))
+	plt.plot(cars, avg, label ="no of device failures ="+str(dead)+"for varying length")
 	plt.draw()
 # plt.plot(cars, avg, 'b--')
 # for i in range(len(avgs)):
 # 	plt.plot(cars, avgs[i], label ="no of device failures ="+str(i*2))
 # plt.errorbar(cars, avg,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
-plt.title("idleness for ")
+plt.title("comparison in idleness for symmetric and asymmetric maps")
 plt.xlabel("number of agents")
 plt.ylabel("graph idleness")
 plt.legend()
