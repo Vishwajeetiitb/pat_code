@@ -6,10 +6,11 @@ import os
 rootdir1 ='/home/arms03/Documents/patrolling_vishwajeet_dikshant/pat_code/conscientious_reactive/dual_failure_random_dead/data_3/'
 rootdir2 = '/home/arms03/Documents/patrolling_vishwajeet_dikshant/pat_code/conscientious_reactive/dual_failure_random_dead_asymmetric_length/data/'
 
-cars = [1, 2, 4, 5, 6, 7, 8, 10, 12]
+cars =  [1, 2, 4, 5, 6, 7, 8, 10, 12]
 deads = [0,12,25]
 num_runs = 8
 plt.figure()
+check = 0
 for dead in deads:
 	avg = []
 	std = []
@@ -35,8 +36,15 @@ for dead in deads:
 		avg.append(np.mean(run_exploration_time))
 		std.append(np.std(run_exploration_time))
 	print(avg)
-	plt.plot(cars, avg, '-', label ="no of device failures ="+str(dead)+" for equal length")
+	if check == 0:
+		plt.plot(cars, avg, 'r-',label ="no. of device failures ="+str(dead)+" for equal length")
+	elif check == 1:
+		plt.plot(cars, avg, 'g-',label ="no. of device failures ="+str(dead)+" for equal length")
+	else:
+		plt.plot(cars, avg, 'b-',label ="no. of device failures ="+str(dead)+" for equal length")
+	check += 1
 	plt.draw()
+check = 0
 for dead in deads:
 	avg = []
 	std = []
@@ -62,7 +70,13 @@ for dead in deads:
 		avg.append(np.mean(run_exploration_time))
 		std.append(np.std(run_exploration_time))
 	print(avg)
-	plt.plot(cars, avg, '--',label ="no of device failures ="+str(dead)+" for varying length")
+	if check == 0:
+		plt.plot(cars, avg, 'r--',label ="no. of device failures ="+str(dead)+" for equal length")
+	elif check == 1:
+		plt.plot(cars, avg, 'g--',label ="no. of device failures ="+str(dead)+" for equal length")
+	else:
+		plt.plot(cars, avg, 'b--',label ="no. of device failures ="+str(dead)+" for equal length")
+	check += 1
 	plt.draw()
 # plt.plot(cars, avg, 'b--')
 # plt.errorbar(cars, avg,yerr=std, fmt = 'o', ecolor='g', capthick=1.0)
