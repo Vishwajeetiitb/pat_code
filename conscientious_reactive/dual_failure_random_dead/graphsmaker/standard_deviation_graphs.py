@@ -6,7 +6,7 @@ import os
 rootdir ='../data_3/'
 
 cars = [1,2,3,4,5,6,7,8,9,10,12]
-deads = [0]#,5,12,20,25]
+deads = [0,5,12,20,25]
 num_runs = 8
 plt.figure()
 avg = []
@@ -25,10 +25,10 @@ for dead in deads:
 		avg.append(np.mean(graph_idlness))
 		std.append(np.std(graph_idlness))
 	print(std)
-	#plt.errorbar(car, avg,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
+	# plt.errorbar(car, avg,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
 	plt.draw()
 
-plt.plot(cars, avg, 'b--')
+# plt.plot(cars, avg, 'b--')
 # for i in range(len(avgs)):
 # 	plt.plot(cars, avgs[i], label ="no of device failures ="+str(i*2))
 plt.errorbar(cars, avg,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
