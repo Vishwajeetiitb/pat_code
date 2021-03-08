@@ -3,11 +3,11 @@ import matplotlib.pyplot as plt
 import xlsxwriter
 import numpy as np
 import os
-rootdir ='../data/'
+rootdir ='../data_2/'
 
-cars = [1,2,3,4,5,6,7,8,9,10]
-deads = [0,2,4,6,8]
-num_runs = 10
+cars = [1,2,4,6,8,10,12]
+deads = [0,4,10,14,21,28]
+num_runs = 6
 plt.figure()
 for dead in deads:
 	avg_norm = []

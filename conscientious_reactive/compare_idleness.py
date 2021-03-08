@@ -10,7 +10,7 @@ cars =  [1, 2, 4, 5, 6, 7, 8, 10, 12]
 deads = [0,12,25]
 num_runs = 8
 plt.figure()
-
+check = 0
 for dead in deads:
 	avg = []
 	std = []
@@ -27,9 +27,15 @@ for dead in deads:
 		avg.append(np.mean(graph_idlness))
 		# std.append(np.std(graph_idlness))
 	print(avg)
-	plt.plot(cars, avg, '-',label ="no. of device failures ="+str(dead)+" for equal length")
+	if check == 0:
+		plt.plot(cars, avg, 'r-',label ="no. of device failures ="+str(dead)+" for equal length")
+	elif check == 1:
+		plt.plot(cars, avg, 'g-',label ="no. of device failures ="+str(dead)+" for equal length")
+	else:
+		plt.plot(cars, avg, 'b-',label ="no. of device failures ="+str(dead)+" for equal length")
+	check += 1
 	plt.draw()
-
+check = 0
 for dead in deads:
 	avg = []
 	std = []
@@ -46,7 +52,13 @@ for dead in deads:
 		avg.append(np.mean(graph_idlness))
 		# std.append(np.std(graph_idlness))
 	print(avg)
-	plt.plot(cars, avg,'--', label ="no. of device failures ="+str(dead)+" for varying length")
+	if check == 0:
+		plt.plot(cars, avg, 'r--',label ="no. of device failures ="+str(dead)+" for equal length")
+	elif check == 1:
+		plt.plot(cars, avg, 'g--',label ="no. of device failures ="+str(dead)+" for equal length")
+	else:
+		plt.plot(cars, avg, 'b--',label ="no. of device failures ="+str(dead)+" for equal length")
+	check += 1
 	plt.draw()
 # plt.plot(cars, avg, 'b--')
 # for i in range(len(avgs)):
