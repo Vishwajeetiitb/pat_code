@@ -21,14 +21,15 @@ for dead in deads:
 			# print(path+'run'+str(i)+'/run.xlsx')
 			runs.append(np.array(pd.read_excel(pd.ExcelFile(path+'run'+str(i)+'/run.xlsx'))))
 			runs[i] = runs[i][0:][:,1:]
+			plt.scatter(runs[i],car)
 			instantaneous_node_idleness.append(np.mean(runs[i],axis=1))
-            plt.scatter(instantaneous_node_idleness, car)
+                        # plt.scatter(instantaneous_node_idleness, car)
 		# graph_idlness = np.mean(instantaneous_node_idleness,axis=1)
 		# avg.append(np.mean(graph_idlness))
 		# std.append(np.std(graph_idlness))
 	# print(avg)
 	# plt.plot(cars, avg, label ="no of device failures ="+str(dead))
-	plt.draw()
+			# plt.draw()
 
 # plt.plot(cars, avg, 'b--')
 # for i in range(len(avgs)):
