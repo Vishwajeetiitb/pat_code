@@ -14,15 +14,20 @@ avgs = []
 for dead in deads:
 	avg = []
 	std = []
+    max_val = []
+    min_val = []
 	for car in cars:
 		path = rootdir+'cr'+str(car)+'/'+str(dead)+'devices_failed/'
 		runs = []
 		instantaneous_node_idleness =[]
+        max_val = []
+        min_val = []
 		for i in range(num_runs):
 			#print(path+'run'+str(i)+'/run.xlsx')
 			runs.append(np.array(pd.read_excel(pd.ExcelFile(path+'run'+str(i)+'/run.xlsx'))))
 			runs[i] = runs[i][0:][:,1:]
 			instantaneous_node_idleness.append(np.mean(runs[i],axis=1))
+            max_val.append(np.max(runs[i])
 		graph_idlness = np.mean(instantaneous_node_idleness,axis=1)
 		avg.append(np.mean(graph_idlness))
 		std.append(np.std(graph_idlness))

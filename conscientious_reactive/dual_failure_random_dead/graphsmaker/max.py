@@ -9,7 +9,7 @@ cars =  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12]
 deads = [0,5,12,20,25]
 num_runs = 8
 plt.figure()
-
+# ignore the terminologies
 for dead in deads:
 	avg = []
 	std = []
@@ -26,7 +26,7 @@ for dead in deads:
 		avg.append(np.max(graph_idlness))
 	# 	# std.append(np.std(graph_idlness))
 	print(avg)
-	plt.plot(cars, avg, label =str(dead)+'failures')
+	plt.plot(cars, avg, label =str(dead)+' failures')
 	plt.draw()
 	
 
