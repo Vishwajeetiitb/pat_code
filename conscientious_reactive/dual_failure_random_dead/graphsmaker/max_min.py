@@ -13,30 +13,35 @@ dev = []
 avgs = []
 for dead in deads:
 	avg = []
+	min1 = []
+	max1 = []
 	std = []
-    max_val = []
-    min_val = []
 	for car in cars:
 		path = rootdir+'cr'+str(car)+'/'+str(dead)+'devices_failed/'
 		runs = []
+		min_val = []
+		max_val = []
 		instantaneous_node_idleness =[]
-        max_val = []
-        min_val = []
 		for i in range(num_runs):
 			#print(path+'run'+str(i)+'/run.xlsx')
 			runs.append(np.array(pd.read_excel(pd.ExcelFile(path+'run'+str(i)+'/run.xlsx'))))
 			runs[i] = runs[i][0:][:,1:]
 			instantaneous_node_idleness.append(np.mean(runs[i],axis=1))
-            max_val.append(np.max(runs[i])
+			min_val.append(np.min(runs[i])
+			max_val.append(np.max(runs[i])
 		graph_idlness = np.mean(instantaneous_node_idleness,axis=1)
+		max_check = np.max(max_val)
+		min_check = np.max(min_val)
 		avg.append(np.mean(graph_idlness))
 		std.append(np.std(graph_idlness))
+		max1.append(max_check)
+		min1.append(min_check)
 	print(std)
 	# plt.plot(cars, avg, label =str(dead)+"failures")
 
 	avgs.append(avg)
 	dev.append(std)
-	plt.errorbar(cars, avg,yerr=std, capthick=1.0, label=str(dead)+" failures")
+	plt.errorbar(cars, avg,yerr=[min1, max1], capthick=1.0, label=str(dead)+" failures")
 	plt.draw()
 	# plt.plot(cars, avg, label ="no of device failures ="+str(dead))
 # plt.plot(cars, avg, 'b--')
@@ -48,5 +53,5 @@ plt.xlabel("# agents")
 plt.ylabel("Graph Idleness")
 plt.legend()
 # plt.show()
-plt.savefig('std_deviations.png', dpi = 100)
+plt.savefig('max-min.png', dpi = 100)
 # plt.savefig('dead'+str(dead)+'_new.png', dpi = 100)
