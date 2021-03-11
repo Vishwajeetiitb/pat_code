@@ -23,15 +23,15 @@ for dead in deads:
 			runs.append(np.array(pd.read_excel(pd.ExcelFile(path+'run'+str(i)+'/run.xlsx'))))
 			runs[i] = runs[i][0:][:,1:]
 			max_instantaneous_node_idleness.append(np.max(runs[i]))
-		max_graph_idlness = np.max(instantaneous_node_idleness)
+		max_graph_idlness = np.max(max_instantaneous_node_idleness)
 		avg.append(np.mean(max_graph_idlness))
 		max_all.append(np.max(max_graph_idlness))
 		min_all.append(np.min(max_graph_idlness))
 
 	# 	# std.append(np.std(graph_idlness))
 	print(avg)
-	plt.plot(cars, avg, label =str(dead)+' failures')
-	plt.errorbar(cars, avg,yerr=[max_all, min_all], capthick=1.0, label=str(dead)+" failures")
+	# plt.plot(cars, avg, label =str(dead)+' failures')
+	plt.errorbar(cars, avg,yerr=[min_all, max_all], capthick=1.0, label=str(dead)+" failures")
 	plt.draw()
 	
 
