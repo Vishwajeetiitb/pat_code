@@ -323,6 +323,7 @@ if __name__ == '__main__':
     env=rl_env()
     run(env)
     workbook.close()
+    np.save('./data_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/dead',dead_node)
     s.close()
 
     # startings = [all_routes.split('to')]
