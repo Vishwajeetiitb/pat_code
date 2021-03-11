@@ -13,9 +13,11 @@ import random
 from collections import deque, namedtuple
 import socket
 import xlsxwriter
+from numpy.random import default_rng
+rng = default_rng()
 cars = int(sys.argv[1])
 no_of_failed_devices = int(sys.argv[2])
-dead_node = np.random.choice([i for i in range(25)],no_of_failed_devices)
+dead_node = rng.choice([i for i in range(25)],no_of_failed_devices,replace=False)
 # dead_node = []
 run_id = int(sys.argv[3])
 if 'SUMO_HOME' in os.environ:
