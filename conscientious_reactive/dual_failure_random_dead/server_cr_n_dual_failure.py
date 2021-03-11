@@ -30,7 +30,7 @@ from sumolib import checkBinary
 
 sys.path.append(os.path.join('c:', os.sep, 'whatever', 'path', 'to', 'sumo', 'tools'))
 sumoBinary = checkBinary("sumo-gui")
-sumoCmd = [sumoBinary, "-c", "../../maps/grid_5_5_final.sumocfg",
+sumoCmd = [sumoBinary, "-c", "../../maps/grid_5_5.sumocfg",
            "--tripinfo-output", "../../maps/tripinfo.xml"]
 # sumoCmd   = [sumoBinary, "-c", "grid_5_5.sumocfg", "--tripinfo-output", "tripinfo.xml"] 
 
@@ -308,7 +308,7 @@ def run(env):
 
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
-    port = 8000  # Make sure it's within the > 1024 $$ <65535 range
+    port = 8060  # Make sure it's within the > 1024 $$ <65535 range
     os.system('rm -rf ' +'./data_new_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
     os.system('mkdir '+'./data_new_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
     workbook = xlsxwriter.Workbook('./data_new_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
