@@ -161,7 +161,7 @@ def run(env):
         global_idl+=1
         for car_no in range(cars): 
             edge[car_no] = traci.vehicle.getRoadID('veh'+str(car_no))
-        #print('veh edge data_2: ',edge)
+        #print('veh edge data_3: ',edge)
         for i, ed in enumerate(edge):
             if ed and (ed[0]!=':'):
                 curr_node[i]= ed.split('to')
@@ -249,7 +249,7 @@ def run(env):
     plt.xlabel('Unit Time')
     plt.ylabel('Idleness')
     plt.title('Performance')
-    plt.savefig('./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
+    plt.savefig('./data_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
     peaks = []
     steps = []
     node_id = 0
@@ -262,8 +262,8 @@ def run(env):
         previous_element = element
         index = index + 1
     # plt.plot(steps, peaks)
-    for col, data_2 in enumerate(np.transpose(idle_2d)):
-        worksheet.write_column(0, col+1, data_2)
+    for col, data_3 in enumerate(np.transpose(idle_2d)):
+        worksheet.write_column(0, col+1, data_3)
     worksheet.write_column(0, 0, range(num_steps))
     global s
     message = 'q'
@@ -295,9 +295,9 @@ def extract_routes():
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
     port = 8060  # Make sure it's within the > 1024 $$ <65535 range
-    os.system('rm -rf ' +'./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    os.system('mkdir '+'./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    workbook = xlsxwriter.Workbook('./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
+    os.system('rm -rf ' +'./data_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    os.system('mkdir '+'./data_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    workbook = xlsxwriter.Workbook('./data_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
     s = socket.socket()
     s.connect((host, port))
     all_routes = extract_routes()
@@ -309,6 +309,7 @@ if __name__ == '__main__':
     env=rl_env()
     run(env)
     workbook.close()
+    np.save('./data_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/dead',dead_node)
     s.close()
 
     # startings = [all_routes.split('to')]
