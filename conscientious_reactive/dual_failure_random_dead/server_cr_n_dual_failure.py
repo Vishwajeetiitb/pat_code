@@ -196,7 +196,7 @@ def run(env):
         global_idl+=1
         for car_no in range(cars): 
             edge[car_no] = traci.vehicle.getRoadID('veh'+str(car_no))
-        #print('veh edge data: ',edge)
+        #print('veh edge data_new: ',edge)
         for i, ed in enumerate(edge):
             if ed and (ed[0]!=':'):
                 curr_node[i]= ed.split('to')
@@ -279,7 +279,7 @@ def run(env):
     plt.xlabel('Unit Time')
     plt.ylabel('Idleness')
     plt.title('Performance')
-    plt.savefig('./data_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
+    plt.savefig('./data_new_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
     peaks = []
     steps = []
     node_id = 0
@@ -292,8 +292,8 @@ def run(env):
         previous_element = element
         index = index + 1
     # plt.plot(steps, peaks)
-    for col, data_3 in enumerate(np.transpose(idle_2d)):
-        worksheet.write_column(0, col+1, data_3)
+    for col, data_new_3 in enumerate(np.transpose(idle_2d)):
+        worksheet.write_column(0, col+1, data_new_3)
     worksheet.write_column(0, 0, range(num_steps))
     global s
     message = 'q'
@@ -307,9 +307,9 @@ def run(env):
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
     port = 8000  # Make sure it's within the > 1024 $$ <65535 range
-    os.system('rm -rf ' +'./data_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    os.system('mkdir '+'./data_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    workbook = xlsxwriter.Workbook('./data_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
+    os.system('rm -rf ' +'./data_new_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    os.system('mkdir '+'./data_new_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    workbook = xlsxwriter.Workbook('./data_new_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
     s = socket.socket()
     s.connect((host, port))
     with open('../routes.txt') as f:
