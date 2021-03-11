@@ -28,7 +28,7 @@ from sumolib import checkBinary
 
 sys.path.append(os.path.join('c:', os.sep, 'whatever', 'path', 'to', 'sumo', 'tools'))
 sumoBinary = checkBinary("sumo-gui")
-sumoCmd = [sumoBinary, "-c", "../../maps/grid_5_5.sumocfg",
+sumoCmd = [sumoBinary, "-c", "../../maps/grid_5_5_final.sumocfg",
            "--tripinfo-output", "../../maps/tripinfo.xml"]
 # sumoCmd   = [sumoBinary, "-c", "grid_5_5.sumocfg", "--tripinfo-output", "tripinfo.xml"] 
 

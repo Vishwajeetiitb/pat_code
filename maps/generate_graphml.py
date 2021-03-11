@@ -19,9 +19,9 @@ pos = {}
 G = nx.DiGraph()
 
 optParser = optparse.OptionParser(usage="usage: %prog --input=file.osm [options]")
-optParser.add_option("--input_edg", dest="inFile_edg", default="first.edg.xml", help="specifies the edge file to open")
-optParser.add_option("--input_nod", dest="inFile_nod", default="first.nod.xml", help="specifies the node file to open")
-optParser.add_option("--output", dest="outFile", default="first.graphml", help="specifies the name of the graphml file generated")
+optParser.add_option("--input_edg", dest="inFile_edg", default="grid_5_5_final.edg.xml", help="specifies the edge file to open")
+optParser.add_option("--input_nod", dest="inFile_nod", default="grid_5_5_final.nod.xml", help="specifies the node file to open")
+optParser.add_option("--output", dest="outFile", default="gird_5_5_final.graphml", help="specifies the name of the graphml file generated")
 
 options, args = optParser.parse_args()
 
