@@ -14,6 +14,7 @@ for dead in deads:
 	avg = []
 	max_all = []
 	min_all = []
+	std = []
 	for car in cars:
 		path = rootdir+'cr'+str(car)+'/'+str(dead)+'devices_failed/'
 		runs = []
@@ -25,13 +26,17 @@ for dead in deads:
 			max_instantaneous_node_idleness.append(np.max(runs[i]))
 		max_graph_idlness = np.max(max_instantaneous_node_idleness)
 		avg.append(np.mean(max_graph_idlness))
+		std.append(np.std(max_graph_idlness))
 		max_all.append(np.max(max_graph_idlness))
 		min_all.append(np.min(max_graph_idlness))
 
 	# 	# std.append(np.std(graph_idlness))
-	print(avg)
+	# print(avg)
+	print(std)
+	print(max_all)
+	print(min_all)
 	# plt.plot(cars, avg, label =str(dead)+' failures')
-	plt.errorbar(cars, avg,yerr=[min_all, max_all], capthick=1.0, label=str(dead)+" failures")
+	plt.errorbar(cars, avg,yerr=std, capthick=1.0, label=str(dead)+" failures")
 	plt.draw()
 	
 
