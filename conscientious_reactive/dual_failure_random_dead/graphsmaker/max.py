@@ -9,7 +9,7 @@ cars =  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12]
 deads = [0,5,12,20,25]
 num_runs = 8
 plt.figure()
-
+# ignore the terminologies
 for dead in deads:
 	avg = []
 	std = []
@@ -20,25 +20,26 @@ for dead in deads:
 		for i in range(num_runs):
 			# print(path+'run'+str(i)+'/run.xlsx')
 			runs.append(np.array(pd.read_excel(pd.ExcelFile(path+'run'+str(i)+'/run.xlsx'))))
-			runs[i] = runs[i][500:][:,1:]
-			instantaneous_node_idleness.append(np.mean(runs[i],axis=1))
-		graph_idlness = np.mean(instantaneous_node_idleness,axis=1)
+			runs[i] = runs[i][0:][:,1:]
+			instantaneous_node_idleness.append(np.max(runs[i]))
+		graph_idlness = np.max(instantaneous_node_idleness)
 		avg.append(np.max(graph_idlness))
-		# std.append(np.std(graph_idlness))
+	# 	# std.append(np.std(graph_idlness))
 	print(avg)
-	plt.plot(cars, avg, label ="no of device failures ="+str(dead))
+	plt.plot(cars, avg, label =str(dead)+' failures')
 	plt.draw()
+	
 
 # plt.plot(cars, avg, 'b--')
 # for i in range(len(avgs)):
 # 	plt.plot(cars, avgs[i], label ="no of device failures ="+str(i*2))
 # plt.errorbar(cars, avg,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
-plt.title("idleness with varying runs and agents with diff no of failed devices")
-plt.xlabel("number of agents")
-plt.ylabel("graph idleness")
+plt.title("Max Idleness with varying runs and agents")
+plt.xlabel("# agents")
+plt.ylabel("Graph Idleness")
 plt.legend()
 # plt.show()
-plt.savefig('final.png', dpi = 100)
+plt.savefig('max.png', dpi = 100)
 # plt.savefig('dead'+str(dead)+'_new.png', dpi = 100)
 	
 
