@@ -281,7 +281,7 @@ def run(env):
     plt.xlabel('Unit Time')
     plt.ylabel('Idleness')
     plt.title('Performance')
-    plt.savefig('./data_new_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
+    plt.savefig('./updated_data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
     peaks = []
     steps = []
     node_id = 0
@@ -294,8 +294,8 @@ def run(env):
         previous_element = element
         index = index + 1
     # plt.plot(steps, peaks)
-    for col, data_new_3 in enumerate(np.transpose(idle_2d)):
-        worksheet.write_column(0, col+1, data_new_3)
+    for col, updated_data in enumerate(np.transpose(idle_2d)):
+        worksheet.write_column(0, col+1, updated_data)
     worksheet.write_column(0, 0, range(num_steps))
     global s
     message = 'q'
@@ -309,9 +309,9 @@ def run(env):
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
     port = 8060  # Make sure it's within the > 1024 $$ <65535 range
-    os.system('rm -rf ' +'./data_new_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    os.system('mkdir '+'./data_new_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    workbook = xlsxwriter.Workbook('./data_new_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
+    os.system('rm -rf ' +'./updated_data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    os.system('mkdir '+'./updated_data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    workbook = xlsxwriter.Workbook('./updated_data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
     s = socket.socket()
     s.connect((host, port))
     with open('../routes.txt') as f:
@@ -325,7 +325,7 @@ if __name__ == '__main__':
     env=rl_env()
     run(env)
     workbook.close()
-    np.save('./data_new_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/dead',dead_node)
+    np.save('./updated_data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/dead',dead_node)
     s.close()
 
     # startings = [all_routes.split('to')]
