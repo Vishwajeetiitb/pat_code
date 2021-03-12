@@ -5,9 +5,9 @@ import numpy as np
 import os
 rootdir ='../data/'
 
-cars = [1, 2, 4, 5, 6, 7, 8, 10, 12]
+cars =  [1,3,6,9,12]
 deads = [0,5,12,20,25]
-num_runs = 8
+num_runs = 4
 plt.figure()
 
 for dead in deads:
