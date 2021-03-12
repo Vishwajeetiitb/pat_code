@@ -183,7 +183,7 @@ def run(env):
     ma_ga=deque(maxlen=3000)
     gav=[]
     ss=[]
-    num_steps = 4000
+    num_steps = 3000
     cloud_array = np.zeros([25,cars,25,1])
     idle_2d = np.zeros([num_steps, 25])
     # check = np.random.randint(1000, 3000)
@@ -257,15 +257,15 @@ def run(env):
                 rou_step.append(rou_curr[i])
                 rou_step.append(rou_new)
                 # print('next_route: ', rou_step)
+                print(rou_new)
                 traci.vehicle.setRoute(vehID = 'veh'+str(i), edgeList = rou_step)
                 rou_curr[i]=rou_new
-                if i ==0:
-                    avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(global_idl, global_v_idl,sumo_step, 25)
-                    ma_ga.append(glo_idl)
-                    gav.append(np.mean(ma_ga))
-                    ga.append(glo_idl)
-                    ss.append(sumo_step)
-                    sumo_step+=1
+        avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(global_idl, global_v_idl,sumo_step, 25)
+        ma_ga.append(glo_idl)
+        gav.append(np.mean(ma_ga))
+        ga.append(glo_idl)
+        ss.append(sumo_step)
+        sumo_step+=1
 
    
         prev_node=curr_node.copy()
@@ -325,7 +325,7 @@ if __name__ == '__main__':
     env=rl_env()
     run(env)
     workbook.close()
-    np.save('./data_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/dead',dead_node)
+    np.save('./data_new_3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/dead',dead_node)
     s.close()
 
     # startings = [all_routes.split('to')]

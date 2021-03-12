@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on Thursday 11 March 2021 07:44:27 PM IST by Eclipse SUMO GUI Version 1.8.0
+<!-- generated on Friday 12 March 2021 03:30:37 AM IST by Eclipse SUMO GUI Version 1.8.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
 
     <input>
-        <net-file value="../../maps/grid_5_5_final.net.xml"/>
+        <net-file value="../../maps/first.net.xml"/>
         <route-files value="../../maps/simulation.rou.xml"/>
     </input>
 
@@ -23,7 +23,7 @@
     </report>
 
     <traci_server>
-        <remote-port value="51339"/>
+        <remote-port value="35371"/>
     </traci_server>
 
     <gui_only>

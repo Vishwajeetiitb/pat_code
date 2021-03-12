@@ -1,8 +1,11 @@
 import os
 import time
-agents = [1,3,6,9,12]
-no_fails = [0,5,12,20,25]
-runs = 4
+# agents = [1,3,6,9,12]
+# no_fails = [0,5,12,20,25]
+# runs = 4
+agents = [3]
+no_fails = [22]
+runs = 1
 os.system('rm -rf ./data_new_3/')
 os.system('mkdir ./data_new_3/')
 

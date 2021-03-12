@@ -182,7 +182,7 @@ def run(env):
     ma_ga=deque(maxlen=3000)
     gav=[]
     ss=[]
-    num_steps = 3500
+    num_steps = 30000
     cloud_array = np.zeros([25,cars,25,1])
     idle_2d = np.zeros([num_steps, 25])
     # check = np.random.randint(1000, 3000)
@@ -258,13 +258,12 @@ def run(env):
                 # print('next_route: ', rou_step)
                 traci.vehicle.setRoute(vehID = 'veh'+str(i), edgeList = rou_step)
                 rou_curr[i]=rou_new
-                if i ==0:
-                    avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(global_idl, global_v_idl,sumo_step, 25)
-                    ma_ga.append(glo_idl)
-                    gav.append(np.mean(ma_ga))
-                    ga.append(glo_idl)
-                    ss.append(sumo_step)
-                    sumo_step+=1
+        avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl = eval_met(global_idl, global_v_idl,sumo_step, 25)
+        ma_ga.append(glo_idl)
+        gav.append(np.mean(ma_ga))
+        ga.append(glo_idl)
+        ss.append(sumo_step)
+        sumo_step+=1
 
    
         prev_node=curr_node.copy()
@@ -307,7 +306,7 @@ def run(env):
 
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
-    port = 8000  # Make sure it's within the > 1024 $$ <65535 range
+    port = 8060  # Make sure it's within the > 1024 $$ <65535 range
     os.system('rm -rf ' +'./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
     os.system('mkdir '+'./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
     workbook = xlsxwriter.Workbook('./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
@@ -324,6 +323,7 @@ if __name__ == '__main__':
     env=rl_env()
     run(env)
     workbook.close()
+    np.save('./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/dead',dead_node)
     s.close()
 
     # startings = [all_routes.split('to')]
