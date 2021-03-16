@@ -4,9 +4,9 @@ agents = [1,2, 5,8,12]
 no_fails = [0, 4, 10, 14, 21, 28]
 runs = 3
 
-agents = [14]
-no_fails = [10]
-runs = 1
+# agents = [14]
+# no_fails = [10]
+# runs = 1
 os.system('rm -rf ./data_intent/')
 os.system('mkdir ./data_intent/')
 
