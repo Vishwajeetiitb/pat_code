@@ -200,7 +200,7 @@ def run(env):
                 # print()
                 cloud_array[prev_node[i],i,prev_node[i]]=0
                 # print(dead_node)
-                if (curr_node[i] not in dead_node):
+                if (prev_node[i] not in dead_node):
                     cloud_array[:,i,prev_node[i]]=0
                 global_idl[int(prev_node[i])]=0
                 # print('agent_', i, 'idleness:\n',idle[i].reshape(5,5))
@@ -211,7 +211,7 @@ def run(env):
                 #     fa[j]= bool_f
                 # print(fa)
                 print("current node ",curr_node[i],"dead_node ",dead_node)
-                if (curr_node[i] not in dead_node):
+                if (prev_node[i] not in dead_node):
                     print("yo") 
                     action=CR_patrol(cloud_array[curr_node[i],i],curr_node[i],env)
                 else :
