@@ -46,10 +46,10 @@ class rl_env(object):
         global cars
         # self.nrow, self.ncol= 5, 5
         self.stateSpace=np.array([i for i in range(28)])
-        self.actionSpace = [0, 1, 2, 3]
+        # self.actionSpace = [0, 1, 2, 3]
         #Action space= {'0': 'North', '1': 'South', '2': 'East', '3': 'West'}
         self.state=[0 for i in range(cars)]
-        self.nA = 4
+        # self.nA = 4
         self.nS = 28
         self.reward=[0 for i in range(cars)] #change
 
@@ -173,12 +173,13 @@ def run(env):
                 curr_node[i]=ed[1:].split('_')
                 curr_node[i]=int(curr_node[i][0])
         env.state=curr_node.copy()
-        # print('p_node:',prev_node, 'c_node:',curr_node, 'temp_p: ', temp_p, 'temp_n: ', temp_n)
+        # print('p_node:',prev_node, 'c_node:',curr_node)#, 'temp_p: ', temp_p, 'temp_n: ', temp_n)
         # Action decision on new edge
         for i in range(cars):
+            # print('*****************car: ', i, '***********************')
             if prev_node[i]!=curr_node[i]:        
                 temp_p[i]=prev_node[i]
-                # print(':::::::::::::to next node for', i, '::::::::::::::::')
+                print(':::::::::::::to next node for', i, '::::::::::::::::')
 
                 # print('Veh angle: ', traci.vehicle.getAngle('veh'+str(i)))
                 rou_step=[]
@@ -200,9 +201,11 @@ def run(env):
 
                 # print()
                 cloud_array[prev_node[i],i,prev_node[i]]=0
+                # print("-------------------cloud array: ", cloud_array[:,:,:],"------------------")
                 # print(dead_node)
                 if (prev_node[i] not in dead_node):
                     cloud_array[:,i,prev_node[i]]=0
+                # print("-------------------cloud array updated: ", cloud_array[:,:,:],"------------------")
                 global_idl[int(prev_node[i])]=0
                 # print('agent_', i, 'idleness:\n',idle[i].reshape(5,5))
                 # print('global idleness:\n',global_idl.reshape(5,5))
@@ -213,7 +216,6 @@ def run(env):
                 # print(fa)
                 print("current node ",curr_node[i],"dead_node ",dead_node)
                 if (prev_node[i] not in dead_node):
-                    print("yo") 
                     action=CR_patrol(cloud_array[curr_node[i],i],curr_node[i],env)
                 else :
                     all_routes = extract_routes()
@@ -221,8 +223,9 @@ def run(env):
                     action= int(random.choice(adj_nodes))
                 next_state, reward, action = env.step(action, cloud_array[curr_node[i],i], i)
                 temp_n[i]=next_state
-                # print('action: ', action, 'next_state: ', next_state, 'reward: ', reward)
-                #print('curr_node after step: ',curr_node, env.state)
+                print('prev_state:', prev_node[i], 'curr_state:', curr_node[i])
+                print('action: ', action, 'next_state: ', next_state, 'reward: ', reward)
+                print('curr_node after step: ',curr_node[i], env.state)
                 rou_new=str(curr_node[i])+'to'+str(next_state)
                 rou_step.append(rou_curr[i])
                 rou_step.append(rou_new)
@@ -252,7 +255,7 @@ def run(env):
     plt.xlabel('Unit Time')
     plt.ylabel('Idleness')
     plt.title('Performance')
-    plt.savefig('./check/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
+    plt.savefig('./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
     peaks = []
     steps = []
     node_id = 0
@@ -265,8 +268,8 @@ def run(env):
         previous_element = element
         index = index + 1
     # plt.plot(steps, peaks)
-    for col, check in enumerate(np.transpose(idle_2d)):
-        worksheet.write_column(0, col+1, check)
+    for col, check3 in enumerate(np.transpose(idle_2d)):
+        worksheet.write_column(0, col+1, check3)
     worksheet.write_column(0, 0, range(num_steps))
     global s
     message = 'q'
@@ -298,9 +301,9 @@ def extract_routes():
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
     port = 8060  # Make sure it's within the > 1024 $$ <65535 range
-    os.system('rm -rf ' +'./check/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    os.system('mkdir '+'./check/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    workbook = xlsxwriter.Workbook('./check/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
+    os.system('rm -rf ' +'./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    os.system('mkdir '+'./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    workbook = xlsxwriter.Workbook('./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
     s = socket.socket()
     s.connect((host, port))
     all_routes = extract_routes()
@@ -312,7 +315,7 @@ if __name__ == '__main__':
     env=rl_env()
     run(env)
     workbook.close()
-    np.save('./check/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/dead',dead_node)
+    np.save('./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/dead',dead_node)
     s.close()
 
     # startings = [all_routes.split('to')]
