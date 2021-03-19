@@ -7,19 +7,19 @@ runs = 2
 # agents = [14]
 # no_fails = [10]
 # runs = 1
-os.system('rm -rf ./check/')
-os.system('mkdir ./check/')
+os.system('rm -rf ./check2/')
+os.system('mkdir ./check2/')
 
 for i in agents:
-	os.system('rm -rf ./check/cr'+str(i)+'/')
-	os.system('mkdir ./check/cr'+str(i)+'/')
+	os.system('rm -rf ./check2/cr'+str(i)+'/')
+	os.system('mkdir ./check2/cr'+str(i)+'/')
 	for fail_no in no_fails:
-		os.system('rm -rf ./check/cr'+str(i)+'/'+str(fail_no)+'devices_failed')
-		os.system('mkdir  ./check/cr'+str(i)+'/'+str(fail_no)+'devices_failed')
+		os.system('rm -rf ./check2/cr'+str(i)+'/'+str(fail_no)+'devices_failed')
+		os.system('mkdir  ./check2/cr'+str(i)+'/'+str(fail_no)+'devices_failed')
 for no_agents in agents:
 	for fail_no in no_fails:
 		for run_id in range(runs):
 			print(no_agents,'cars ',fail_no, ' devices are failed ','run id is ',str(run_id))
 			time.sleep(5)
-			os.system('python3 pat_cr_n_iot_server.py '+str(no_agents)+' '+str(fail_no)+' '+str(run_id))
+			os.system('python3 pat_cr_n_intent_iot_server.py '+str(no_agents)+' '+str(fail_no)+' '+str(run_id))
 			time.sleep(2)
