@@ -6,15 +6,15 @@ runs = 2
 # agents = [14]
 # no_fails = [10]
 # runs = 1
-os.system('rm -rf ./check3/')
-os.system('mkdir ./check3/')
+os.system('rm -rf ./check2/')
+os.system('mkdir ./check2/')
 
 for i in agents:
-	os.system('rm -rf ./check3/cr'+str(i)+'/')
-	os.system('mkdir ./check3/cr'+str(i)+'/')
+	os.system('rm -rf ./check2/cr'+str(i)+'/')
+	os.system('mkdir ./check2/cr'+str(i)+'/')
 	for fail_no in no_fails:
-		os.system('rm -rf ./check3/cr'+str(i)+'/'+str(fail_no)+'devices_failed')
-		os.system('mkdir  ./check3/cr'+str(i)+'/'+str(fail_no)+'devices_failed')
+		os.system('rm -rf ./check2/cr'+str(i)+'/'+str(fail_no)+'devices_failed')
+		os.system('mkdir  ./check2/cr'+str(i)+'/'+str(fail_no)+'devices_failed')
 for no_agents in agents:
 	for fail_no in no_fails:
 		for run_id in range(runs):

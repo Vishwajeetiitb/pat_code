@@ -208,7 +208,7 @@ def run(env):
                     
 
                 # print()
-                cloud_array[prev_node[i],i,prev_node[i]]=0
+                # cloud_array[prev_node[i],i,prev_node[i]]=0
                 # print(dead_node)
                 if (prev_node[i] not in dead_node):
                     cloud_array[:,i,prev_node[i]]=0
