@@ -1,6 +1,6 @@
 import os
 import time
-agents = [1,5]#[1,2, 5,8,12]
+agents = [5]#[1,2, 5,8,12]
 no_fails = [4]#[0, 4, 10, 14, 21, 28]
 runs = 2
 # agents = [14]
@@ -20,5 +20,5 @@ for no_agents in agents:
 		for run_id in range(runs):
 			print(no_agents,'cars ',fail_no, ' devices are failed ','run id is ',str(run_id))
 			time.sleep(5)
-			os.system('python3 pat_cr_n_iot_server.py '+str(no_agents)+' '+str(fail_no)+' '+str(run_id))
+			os.system('python3 pat_cr_n_intent_iot_server.py '+str(no_agents)+' '+str(fail_no)+' '+str(run_id))
 			time.sleep(2)
