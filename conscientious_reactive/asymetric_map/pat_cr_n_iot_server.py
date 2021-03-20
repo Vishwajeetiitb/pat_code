@@ -18,7 +18,7 @@ rng = default_rng()
 cars = int(sys.argv[1])
 no_of_failed_devices = int(sys.argv[2])
 # dead_node = rng.choice([i for i in range(28)],no_of_failed_devices,replace=False)
-dead_node = [10,20,21,27]
+dead_node = [10]#,20,21,27]
 # print(dead_node)
 # dead_node = []    
 run_id = int(sys.argv[3])
@@ -202,9 +202,9 @@ def run(env):
                 # print()
                 # cloud_array[prev_node[i],i,prev_node[i]]=0
                 # print(dead_node)
-                if (prev_node[i] not in dead_node):
-                    cloud_array[:,i,prev_node[i]]=0
-                global_idl[int(prev_node[i])]=0
+                if (curr_node[i] not in dead_node):
+                    cloud_array[:,i,curr_node[i]]=0
+                global_idl[int(curr_node[i])]=0
                 # print('agent_', i, 'idleness:\n',idle[i].reshape(5,5))
                 # print('global idleness:\n',global_idl.reshape(5,5))
                 # fa=[[True, True, True, True], [True, True, True, True]]
@@ -213,7 +213,7 @@ def run(env):
                 #     fa[j]= bool_f
                 # print(fa)
                 # print("current node ",curr_node[i],"dead_node ",dead_node)
-                if (prev_node[i] not in dead_node):
+                if (curr_node[i] not in dead_node):
                     action=CR_patrol(cloud_array[curr_node[i],i],curr_node[i],env)
                 else :
                     all_routes = extract_routes()

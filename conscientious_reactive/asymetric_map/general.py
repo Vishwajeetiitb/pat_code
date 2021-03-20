@@ -1,20 +1,20 @@
 import os
 import time
-agents = [5]#[1,2, 5,8,12]
-no_fails = [4]#[0, 4, 10, 14, 21, 28]
-runs = 2
+agents = [1,2, 6, 10, 14]
+no_fails = [0, 4, 10, 14, 21, 28]
+runs = 3
 # agents = [14]
 # no_fails = [10]
 # runs = 1
-os.system('rm -rf ./check2/')
-os.system('mkdir ./check2/')
+os.system('rm -rf ./data_4/')
+os.system('mkdir ./data_4/')
 
 for i in agents:
-	os.system('rm -rf ./check2/cr'+str(i)+'/')
-	os.system('mkdir ./check2/cr'+str(i)+'/')
+	os.system('rm -rf ./data_4/cr'+str(i)+'/')
+	os.system('mkdir ./data_4/cr'+str(i)+'/')
 	for fail_no in no_fails:
-		os.system('rm -rf ./check2/cr'+str(i)+'/'+str(fail_no)+'devices_failed')
-		os.system('mkdir  ./check2/cr'+str(i)+'/'+str(fail_no)+'devices_failed')
+		os.system('rm -rf ./data_4/cr'+str(i)+'/'+str(fail_no)+'devices_failed')
+		os.system('mkdir  ./data_4/cr'+str(i)+'/'+str(fail_no)+'devices_failed')
 for no_agents in agents:
 	for fail_no in no_fails:
 		for run_id in range(runs):
