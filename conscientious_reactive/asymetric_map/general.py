@@ -1,8 +1,8 @@
 import os
 import time
-agents = [1]#[1,2, 5,8,12]
+agents = [1,5]#[1,2, 5,8,12]
 no_fails = [4]#[0, 4, 10, 14, 21, 28]
-runs = 1
+runs = 2
 # agents = [14]
 # no_fails = [10]
 # runs = 1

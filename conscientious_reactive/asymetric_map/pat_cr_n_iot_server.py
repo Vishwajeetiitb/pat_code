@@ -179,7 +179,7 @@ def run(env):
             # print('*****************car: ', i, '***********************')
             if prev_node[i]!=curr_node[i]:        
                 temp_p[i]=prev_node[i]
-                print(':::::::::::::to next node for', i, '::::::::::::::::')
+                # print(':::::::::::::to next node for', i, '::::::::::::::::')
 
                 # print('Veh angle: ', traci.vehicle.getAngle('veh'+str(i)))
                 rou_step=[]
@@ -200,12 +200,10 @@ def run(env):
                     
 
                 # print()
-                cloud_array[prev_node[i],i,prev_node[i]]=0
-                print("-------------------cloud array: ", cloud_array,"------------------")
+                # cloud_array[prev_node[i],i,prev_node[i]]=0
                 # print(dead_node)
                 if (prev_node[i] not in dead_node):
                     cloud_array[:,i,prev_node[i]]=0
-                # print("-------------------cloud array updated: ", cloud_array[:,:,:],"------------------")
                 global_idl[int(prev_node[i])]=0
                 # print('agent_', i, 'idleness:\n',idle[i].reshape(5,5))
                 # print('global idleness:\n',global_idl.reshape(5,5))
@@ -214,7 +212,7 @@ def run(env):
                 # if j==0 or j==1:
                 #     fa[j]= bool_f
                 # print(fa)
-                print("current node ",curr_node[i],"dead_node ",dead_node)
+                # print("current node ",curr_node[i],"dead_node ",dead_node)
                 if (prev_node[i] not in dead_node):
                     action=CR_patrol(cloud_array[curr_node[i],i],curr_node[i],env)
                 else :
@@ -223,9 +221,9 @@ def run(env):
                     action= int(random.choice(adj_nodes))
                 next_state, reward, action = env.step(action, cloud_array[curr_node[i],i], i)
                 temp_n[i]=next_state
-                print('prev_state:', prev_node[i], 'curr_state:', curr_node[i])
-                print('action: ', action, 'next_state: ', next_state, 'reward: ', reward)
-                print('curr_node after step: ',curr_node[i], env.state)
+                # print('prev_state:', prev_node[i], 'curr_state:', curr_node[i])
+                # print('action: ', action, 'next_state: ', next_state, 'reward: ', reward)
+                # print('curr_node after step: ',curr_node[i], env.state)
                 rou_new=str(curr_node[i])+'to'+str(next_state)
                 rou_step.append(rou_curr[i])
                 rou_step.append(rou_new)
