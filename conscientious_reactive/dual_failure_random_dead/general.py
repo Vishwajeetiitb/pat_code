@@ -2,7 +2,7 @@ import os
 import time
 agents = [1,3,6,9,12]
 no_fails = [0,5,12,20,25]
-runs = 4
+runs = 3
 # agents = [3]
 # no_fails = [22]
 # runs = 1
