@@ -37,11 +37,11 @@ for dead in deads:
 # 	plt.plot(avg,carss[i], label ="no of device failures ="+str(i*2))
 # plt.errorbar(avg,cars,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
 plt.title("Graph Idleness for Map B")
-plt.xlabel("# agents")
-plt.ylabel("Graph Idleness")
+plt.ylabel("# agents")
+plt.xlabel("Graph Idleness")
 plt.legend()
 # plt.show()
-plt.savefig('final.png', dpi = 100)
+plt.savefig('final2.png', dpi = 100)
 # plt.savefig('dead'+str(dead)+'_new.png', dpi = 100)
 	
 
