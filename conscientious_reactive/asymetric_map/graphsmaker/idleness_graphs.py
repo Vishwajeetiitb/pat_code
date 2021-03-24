@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import xlsxwriter
 import numpy as np
 import os
-rootdir ='../data_3/'
+rootdir ='../data_3_updated/'
 
 cars =  [1,2, 5,8,12]
 deads = [0, 4, 10, 14, 21, 28]
@@ -26,14 +26,17 @@ for dead in deads:
 		avg.append(np.mean(graph_idlness))
 		# std.append(np.std(graph_idlness))
 	print(avg)
-	plt.plot(cars, avg, label =str(dead)+" failures")
+	if dead == 0:
+		plt.plot(avg,cars, label =str(dead)+" failure")
+	else:
+		plt.plot(avg,cars, label =str(dead)+" failures")
 	plt.draw()
 
-# plt.plot(cars, avg, 'b--')
+# plt.plot(avg,cars, 'b--')
 # for i in range(len(avgs)):
-# 	plt.plot(cars, avgs[i], label ="no of device failures ="+str(i*2))
-# plt.errorbar(cars, avg,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
-plt.title("Idleness with varying runs and agents")
+# 	plt.plot(avg,carss[i], label ="no of device failures ="+str(i*2))
+# plt.errorbar(avg,cars,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
+plt.title("Graph Idleness for Map C")
 plt.xlabel("# agents")
 plt.ylabel("Graph Idleness")
 plt.legend()
