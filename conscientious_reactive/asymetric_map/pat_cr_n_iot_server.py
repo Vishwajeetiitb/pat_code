@@ -17,13 +17,7 @@ from numpy.random import default_rng
 rng = default_rng()
 cars = int(sys.argv[1])
 no_of_failed_devices = int(sys.argv[2])
-<<<<<<< HEAD
 dead_node = rng.choice([i for i in range(28)],no_of_failed_devices,replace=False)
-# dead_node = [10]
-=======
-# dead_node = rng.choice([i for i in range(28)],no_of_failed_devices,replace=False)
-dead_node = [10]#,20,21,27]
->>>>>>> ee0012c882939738aaef49973f02a4aaecbf5d10
 # print(dead_node)
 # dead_node = []    
 run_id = int(sys.argv[3])
@@ -51,10 +45,10 @@ class rl_env(object):
         global cars
         # self.nrow, self.ncol= 5, 5
         self.stateSpace=np.array([i for i in range(28)])
-        # self.actionSpace = [0, 1, 2, 3]
+        self.actionSpace = [0, 1, 2, 3]
         #Action space= {'0': 'North', '1': 'South', '2': 'East', '3': 'West'}
         self.state=[0 for i in range(cars)]
-        # self.nA = 4
+        self.nA = 4
         self.nS = 28
         self.reward=[0 for i in range(cars)] #change
 
@@ -119,16 +113,24 @@ def eval_met(idle, v_idle,sumo_step, n):
     return avg_v_idl, max_v_idl, sd_v_idl, glo_v_idl, glo_max_v_idl, glo_sd_v_idl, glo_idl, glo_max_idl
 #end of fn
 
-def CR_patrol(idle, c, env):
+def CR_patrol(idle, c, env,existing_action):
 
     global adj_nodes,all_routes
     all_routes = extract_routes()
     adj_nodes = [s.split("to")[1] for s in all_routes if s.startswith(str(c)+"to")]
     adj_idle = []
     # print("yo",adj_nodes,c)
-    for node in adj_nodes:
-        adj_idle.append(idle[int(node)])
-    action_node = int(adj_nodes[adj_idle.index(max(adj_idle))])
+    temp_adj = np.setdiff1d(adj_nodes,existing_action)
+    if len(temp_adj)!=0:
+        for node in temp_adj:
+            adj_idle.append(idle[int(node)])
+        action_node = int(temp_adj[adj_idle.index(max(adj_idle))])
+    else:
+        for node in adj_nodes:
+            adj_idle.append(idle[int(node)])
+        action_node = int(adj_nodes[adj_idle.index(max(adj_idle))])
+
+
     return action_node
 
 #end of fn
@@ -157,6 +159,7 @@ def run(env):
     num_steps = 30000
     cloud_array = np.zeros([28,cars,28,1])
     idle_2d = np.zeros([num_steps, 28])
+    action_list = [28+1 for i in range(cars)]
     # check = np.random.randint(1000, 3000)
     while traci.simulation.getMinExpectedNumber()>0:
         # if sumo_step == check:
@@ -169,7 +172,7 @@ def run(env):
         global_idl+=1
         for car_no in range(cars): 
             edge[car_no] = traci.vehicle.getRoadID('veh'+str(car_no))
-        #print('veh edge check: ',edge)
+        #print('veh edge data_3: ',edge)
         for i, ed in enumerate(edge):
             if ed and (ed[0]!=':'):
                 curr_node[i]= ed.split('to')
@@ -178,10 +181,9 @@ def run(env):
                 curr_node[i]=ed[1:].split('_')
                 curr_node[i]=int(curr_node[i][0])
         env.state=curr_node.copy()
-        # print('p_node:',prev_node, 'c_node:',curr_node)#, 'temp_p: ', temp_p, 'temp_n: ', temp_n)
+        # print('p_node:',prev_node, 'c_node:',curr_node, 'temp_p: ', temp_p, 'temp_n: ', temp_n)
         # Action decision on new edge
         for i in range(cars):
-            # print('*****************car: ', i, '***********************')
             if prev_node[i]!=curr_node[i]:        
                 temp_p[i]=prev_node[i]
                 # print(':::::::::::::to next node for', i, '::::::::::::::::')
@@ -202,21 +204,14 @@ def run(env):
                 cr[i]+=prev_reward
                 #acr=cr/sumo_step
                 #print('acr: ', acr)
+                    
+
                 # print()
-<<<<<<< HEAD
-                cloud_array[prev_node[i],i,prev_node[i]]=0
-                print()
-                # print(dead_node)
-                if (prev++_node[i] not in dead_node):
-                    cloud_array[:,i,prev_node[i]]=0
-                global_idl[int(prev_node[i])]=0
-=======
                 # cloud_array[prev_node[i],i,prev_node[i]]=0
                 # print(dead_node)
                 if (curr_node[i] not in dead_node):
                     cloud_array[:,i,curr_node[i]]=0
                 global_idl[int(curr_node[i])]=0
->>>>>>> ee0012c882939738aaef49973f02a4aaecbf5d10
                 # print('agent_', i, 'idleness:\n',idle[i].reshape(5,5))
                 # print('global idleness:\n',global_idl.reshape(5,5))
                 # fa=[[True, True, True, True], [True, True, True, True]]
@@ -226,16 +221,16 @@ def run(env):
                 # print(fa)
                 # print("current node ",curr_node[i],"dead_node ",dead_node)
                 if (curr_node[i] not in dead_node):
-                    action=CR_patrol(cloud_array[curr_node[i],i],curr_node[i],env)
+                    # print("yo") 
+                    action_list[i]=CR_patrol(cloud_array[curr_node[i],i],curr_node[i],env,np.array(action_list))
                 else :
                     all_routes = extract_routes()
                     adj_nodes = [s.split("to")[1] for s in all_routes if s.startswith(str(curr_node[i])+"to")]
-                    action= int(random.choice(adj_nodes))
-                next_state, reward, action = env.step(action, cloud_array[curr_node[i],i], i)
+                    action_list[i]= int(random.choice(adj_nodes))
+                next_state, reward, action_list[i] = env.step(action_list[i], cloud_array[curr_node[i],i], i)
                 temp_n[i]=next_state
-                # print('prev_state:', prev_node[i], 'curr_state:', curr_node[i])
                 # print('action: ', action, 'next_state: ', next_state, 'reward: ', reward)
-                # print('curr_node after step: ',curr_node[i], env.state)
+                #print('curr_node after step: ',curr_node, env.state)
                 rou_new=str(curr_node[i])+'to'+str(next_state)
                 rou_step.append(rou_curr[i])
                 rou_step.append(rou_new)
@@ -265,7 +260,7 @@ def run(env):
     plt.xlabel('Unit Time')
     plt.ylabel('Idleness')
     plt.title('Performance')
-    plt.savefig('./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
+    plt.savefig('./final_data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
     peaks = []
     steps = []
     node_id = 0
@@ -278,8 +273,8 @@ def run(env):
         previous_element = element
         index = index + 1
     # plt.plot(steps, peaks)
-    for col, check3 in enumerate(np.transpose(idle_2d)):
-        worksheet.write_column(0, col+1, check3)
+    for col, data_3 in enumerate(np.transpose(idle_2d)):
+        worksheet.write_column(0, col+1, data_3)
     worksheet.write_column(0, 0, range(num_steps))
     global s
     message = 'q'
@@ -311,9 +306,9 @@ def extract_routes():
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
     port = 8060  # Make sure it's within the > 1024 $$ <65535 range
-    os.system('rm -rf ' +'./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    os.system('mkdir '+'./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    workbook = xlsxwriter.Workbook('./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
+    os.system('rm -rf ' +'./final_data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    os.system('mkdir '+'./final_data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    workbook = xlsxwriter.Workbook('./final_data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
     s = socket.socket()
     s.connect((host, port))
     all_routes = extract_routes()
@@ -325,7 +320,7 @@ if __name__ == '__main__':
     env=rl_env()
     run(env)
     workbook.close()
-    np.save('./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/dead',dead_node)
+    np.save('./final_data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/dead',dead_node)
     s.close()
 
     # startings = [all_routes.split('to')]
