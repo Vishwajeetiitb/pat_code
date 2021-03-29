@@ -18,7 +18,7 @@ rng = default_rng()
 cars = int(sys.argv[1])
 no_of_failed_devices = int(sys.argv[2])
 # dead_node = rng.choice([i for i in range(28)],no_of_failed_devices,replace=False)
-dead_node = [10,20,21,27]
+dead_node = [10]
 # print(dead_node)
 # dead_node = []    
 run_id = int(sys.argv[3])
@@ -261,7 +261,7 @@ def run(env):
     plt.xlabel('Unit Time')
     plt.ylabel('Idleness')
     plt.title('Performance')
-    plt.savefig('./check2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
+    plt.savefig('./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
     peaks = []
     steps = []
     node_id = 0
@@ -307,9 +307,9 @@ def extract_routes():
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
     port = 8060  # Make sure it's within the > 1024 $$ <65535 range
-    os.system('rm -rf ' +'./check2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    os.system('mkdir '+'./check2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    workbook = xlsxwriter.Workbook('./check2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
+    os.system('rm -rf ' +'./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    os.system('mkdir '+'./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    workbook = xlsxwriter.Workbook('./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
     s = socket.socket()
     s.connect((host, port))
     all_routes = extract_routes()
@@ -321,7 +321,7 @@ if __name__ == '__main__':
     env=rl_env()
     run(env)
     workbook.close()
-    np.save('./check2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/dead',dead_node)
+    np.save('./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/dead',dead_node)
     s.close()
 
     # startings = [all_routes.split('to')]

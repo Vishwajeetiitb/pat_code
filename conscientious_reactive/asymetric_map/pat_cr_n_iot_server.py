@@ -17,8 +17,8 @@ from numpy.random import default_rng
 rng = default_rng()
 cars = int(sys.argv[1])
 no_of_failed_devices = int(sys.argv[2])
-# dead_node = rng.choice([i for i in range(28)],no_of_failed_devices,replace=False)
-dead_node = [10,20,21,27]
+dead_node = rng.choice([i for i in range(28)],no_of_failed_devices,replace=False)
+# dead_node = [10]
 # print(dead_node)
 # dead_node = []    
 run_id = int(sys.argv[3])
@@ -196,12 +196,11 @@ def run(env):
                 cr[i]+=prev_reward
                 #acr=cr/sumo_step
                 #print('acr: ', acr)
-                    
-
                 # print()
                 cloud_array[prev_node[i],i,prev_node[i]]=0
+                print()
                 # print(dead_node)
-                if (prev_node[i] not in dead_node):
+                if (prev++_node[i] not in dead_node):
                     cloud_array[:,i,prev_node[i]]=0
                 global_idl[int(prev_node[i])]=0
                 # print('agent_', i, 'idleness:\n',idle[i].reshape(5,5))
