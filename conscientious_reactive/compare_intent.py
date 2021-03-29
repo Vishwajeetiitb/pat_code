@@ -6,10 +6,12 @@ import os
 rootdir1 ='/home/dikshant/github/pat_code/conscientious_reactive/dual_failure_random_dead/data_3/'
 rootdir2 = '/home/dikshant/github/pat_code/conscientious_reactive/dual_failure_random_dead/updated_data/'
 
-cars =  [1,3,6,9,12]
-deads = [0, 12,25]
+cars =  [1,3]#,6,9,12]
+deads = [0, 12]#,25]
 num_runs = 3
-plt.figure()
+fig, axes = plt.subplot()
+colors = ['r','g','b']
+styles = ['-','-.']
 check = 0
 for dead in deads:
 	avg = []
@@ -28,13 +30,13 @@ for dead in deads:
 		# std.append(np.std(graph_idlness))
 	print(avg)
 	if check == 0:
-		plt.plot(avg,cars, 'r-',label =str(dead)+" w/o intent")
+		ax.plot(cars,avg, c=colors[check], ls=styles[0])
 	elif check == 1:
-		plt.plot(avg,cars, 'g-',label =str(dead)+" w/o intent")
+		ax.plot(cars,avg,  c=colors[check], ls=styles[0])
 	else:
-		plt.plot(avg,cars, 'b-',label =str(dead)+" w/o intent")
+		ax.plot(cars,avg,  c=colors[2], ls=styles[0])
 	check += 1
-	plt.draw()
+	# plt.draw()
 check = 0
 for dead in deads:
 	avg = []
@@ -53,24 +55,26 @@ for dead in deads:
 		# std.append(np.std(graph_idlness))
 	print(avg)
 	if check == 0:
-		plt.plot(avg,cars, 'r--',label =str(dead)+" w intent")
+		ax.plot(cars,avg, c=colors[check], ls=styles[1])
 	elif check == 1:
-		plt.plot(avg,cars, 'g--',label =str(dead)+" w intent")
+		ax.plot(cars,avg, c=colors[check], ls=styles[1])
 	else:
-		plt.plot(avg,cars, 'b--',label =str(dead)+" w intent")
+		ax.plot(cars,avg, c=colors[2], ls=styles[1])
 	check += 1
-	plt.draw()
-# plt.plot(avg,cars, 'b--')
+	# plt.draw()
+# plt.plot(cars,avg, 'b--')
 # for i in range(len(avgs)):
 # 	plt.plot(cars, avgs[i], label ="no of device failures ="+str(i*2))
 # plt.errorbar(cars, avg,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
-plt.title("Intent comparison for Map A")
-plt.ylabel("# agents")
-plt.xlabel("Graph Idleness")
-plt.legend()
-# plt.show()
+ax.title("Map A")
+ax.legend(loc=1)
+ax2.legend(loc=3)
+plt.xlabel("# cars")
+plt.ylabel("Graph Idleness")
+# plt.legend()
+# ax.show()
 plt.savefig('intent3.png', dpi = 100)
-# plt.savefig('dead'+str(dead)+'_new.png', dpi = 100)
+# ax.savefig('dead'+str(dead)+'_new.png', dpi = 100)
 	
 
 

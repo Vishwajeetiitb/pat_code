@@ -27,21 +27,21 @@ for dead in deads:
 		# std.append(np.std(graph_idlness))
 	print(avg)
 	if dead == 0:
-		plt.plot(avg,cars, label =str(dead)+" failure")
+		plt.plot(cars,avg, label =str(dead)+" failure")
 	else:
-		plt.plot(avg,cars, label =str(dead)+" failures")
+		plt.plot(cars,avg, label =str(dead)+" failures")
 	plt.draw()
 
-# plt.plot(avg,cars, 'b--')
+# plt.plot(cars,avg, 'b--')
 # for i in range(len(avgs)):
-# 	plt.plot(avg,carss[i], label ="no of device failures ="+str(i*2))
-# plt.errorbar(avg,cars,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
-plt.title("Graph Idleness for Map C")
+# 	plt.plot(cars,avgs[i], label ="no of device failures ="+str(i*2))
+# plt.errorbar(cars,avg,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
+plt.title("Map C")
 plt.ylabel("# agents")
 plt.xlabel("Graph Idleness")
 plt.legend()
 # plt.show()
-plt.savefig('final2.png', dpi = 100)
+plt.savefig('result3.png', dpi = 100)
 # plt.savefig('dead'+str(dead)+'_new.png', dpi = 100)
 	
 
