@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import xlsxwriter
 import numpy as np
 import os
-rootdir1 ='/home/dikshant/github/pat_code/conscientious_reactive/dual_failure_random_dead_asymmetric_length/data/'
-rootdir2 = '/home/dikshant/github/pat_code/conscientious_reactive/dual_failure_random_dead_asymmetric_length/data_2/'
+rootdir1 ='/home/dikshant/github/pat_code/conscientious_reactive/dual_failure_random_dead/data_3/'
+rootdir2 = '/home/dikshant/github/pat_code/conscientious_reactive/dual_failure_random_dead/updated_data/'
 
 cars =  [1,3,6,9,12]
 deads = [0, 12,25]
@@ -64,12 +64,12 @@ for dead in deads:
 # for i in range(len(avgs)):
 # 	plt.plot(cars, avgs[i], label ="no of device failures ="+str(i*2))
 # plt.errorbar(cars, avg,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
-plt.title("Intent comparison for Map B")
+plt.title("Intent comparison for Map A")
 plt.ylabel("# agents")
 plt.xlabel("Graph Idleness")
 plt.legend()
 # plt.show()
-plt.savefig('intent2.png', dpi = 100)
+plt.savefig('intent3.png', dpi = 100)
 # plt.savefig('dead'+str(dead)+'_new.png', dpi = 100)
 	
 
