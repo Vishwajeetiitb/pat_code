@@ -3,11 +3,11 @@ import matplotlib.pyplot as plt
 import xlsxwriter
 import numpy as np
 import os
-rootdir ='../data_3/'
+rootdir ='../updated_data/'
 
-cars = [1,2,3,4,5,6,7,8,9,10,12]
-deads = [0,5,12,20,25]
-num_runs = 8
+cars =  [1,3,6,9,12]
+deads = [0,12,25]
+num_runs = 3
 plt.figure()
 dev = []
 avgs = []
@@ -27,21 +27,24 @@ for dead in deads:
 		avg.append(np.mean(graph_idlness))
 		std.append(np.std(graph_idlness))
 	print(std)
-	# plt.plot(cars, avg, label =str(dead)+"failures")
+	# plt.plot(avg,cars, label =str(dead)+"failures")
 
 	avgs.append(avg)
 	dev.append(std)
-	plt.errorbar(cars, avg,yerr=std, capthick=1.0, label=str(dead)+" failures")
+	if dead == 0:
+		plt.errorbar(avg,cars,xerr=std, capthick=1.0, label=str(dead)+" failure")
+	else:
+		plt.errorbar(avg,cars,xerr=std, capthick=1.0, label=str(dead)+" failures")
 	plt.draw()
-	# plt.plot(cars, avg, label ="no of device failures ="+str(dead))
-# plt.plot(cars, avg, 'b--')
+	# plt.plot(avg,cars, label ="no of device failures ="+str(dead))
+# plt.plot(avg,cars, 'b--')
 # for i in range(len(dev)):
-	# plt.plot(cars, avgs[i])#, label ="no of device failures ="+str(i*2))
-	# plt.errorbar(cars, avgs[i], yerr = dev[i],  capthick=1.0)
-plt.title("Idleness with varying runs and agents")
-plt.xlabel("# agents")
-plt.ylabel("Graph Idleness")
+	# plt.plot(avg,carss[i])#, label ="no of device failures ="+str(i*2))
+	# plt.errorbar(avg,carss[i], yerr = dev[i],  capthick=1.0)
+plt.title("Graph Idleness with standard deviation for Map A")
+plt.ylabel("# agents")
+plt.xlabel("Graph Idleness")
 plt.legend()
 # plt.show()
-plt.savefig('std_deviations.png', dpi = 100)
+plt.savefig('std_deviations2.png', dpi = 100)
 # plt.savefig('dead'+str(dead)+'_new.png', dpi = 100)

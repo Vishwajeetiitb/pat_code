@@ -197,7 +197,7 @@ def run(env):
         global_idl+=1
         for car_no in range(cars): 
             edge[car_no] = traci.vehicle.getRoadID('veh'+str(car_no))
-        #print('veh edge data: ',edge)
+        #print('veh edge data_2: ',edge)
         for i, ed in enumerate(edge):
             if ed and (ed[0]!=':'):
                 curr_node[i]= ed.split('to')
@@ -232,7 +232,7 @@ def run(env):
                     
 
                 # print()
-                cloud_array[prev_node[i],i,prev_node[i]]=0
+                # cloud_array[prev_node[i],i,prev_node[i]]=0
                 # print(dead_node)
                 if (curr_node[i] not in dead_node):
                     cloud_array[:,i,prev_node[i]]=0
@@ -279,7 +279,7 @@ def run(env):
     plt.xlabel('Unit Time')
     plt.ylabel('Idleness')
     plt.title('Performance')
-    plt.savefig('./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
+    plt.savefig('./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
     peaks = []
     steps = []
     node_id = 0
@@ -292,8 +292,8 @@ def run(env):
         previous_element = element
         index = index + 1
     # plt.plot(steps, peaks)
-    for col, data in enumerate(np.transpose(idle_2d)):
-        worksheet.write_column(0, col+1, data)
+    for col, data_2 in enumerate(np.transpose(idle_2d)):
+        worksheet.write_column(0, col+1, data_2)
     worksheet.write_column(0, 0, range(num_steps))
     global s
     message = 'q'
@@ -307,9 +307,9 @@ def run(env):
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
     port = 8060  # Make sure it's within the > 1024 $$ <65535 range
-    os.system('rm -rf ' +'./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    os.system('mkdir '+'./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
-    workbook = xlsxwriter.Workbook('./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
+    os.system('rm -rf ' +'./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    os.system('mkdir '+'./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    workbook = xlsxwriter.Workbook('./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
     s = socket.socket()
     s.connect((host, port))
     with open('../routes.txt') as f:
@@ -323,7 +323,7 @@ if __name__ == '__main__':
     env=rl_env()
     run(env)
     workbook.close()
-    np.save('./data/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/dead',dead_node)
+    np.save('./data_2/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/dead',dead_node)
     s.close()
 
     # startings = [all_routes.split('to')]

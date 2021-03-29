@@ -17,8 +17,12 @@ from numpy.random import default_rng
 rng = default_rng()
 cars = int(sys.argv[1])
 no_of_failed_devices = int(sys.argv[2])
+<<<<<<< HEAD
 # dead_node = rng.choice([i for i in range(28)],no_of_failed_devices,replace=False)
 dead_node = [10]
+=======
+dead_node = rng.choice([i for i in range(28)],no_of_failed_devices,replace=False)
+>>>>>>> ee0012c882939738aaef49973f02a4aaecbf5d10
 # print(dead_node)
 # dead_node = []    
 run_id = int(sys.argv[3])
@@ -208,11 +212,11 @@ def run(env):
                     
 
                 # print()
-                cloud_array[prev_node[i],i,prev_node[i]]=0
+                # cloud_array[prev_node[i],i,prev_node[i]]=0
                 # print(dead_node)
-                if (prev_node[i] not in dead_node):
-                    cloud_array[:,i,prev_node[i]]=0
-                global_idl[int(prev_node[i])]=0
+                if (curr_node[i] not in dead_node):
+                    cloud_array[:,i,curr_node[i]]=0
+                global_idl[int(curr_node[i])]=0
                 # print('agent_', i, 'idleness:\n',idle[i].reshape(5,5))
                 # print('global idleness:\n',global_idl.reshape(5,5))
                 # fa=[[True, True, True, True], [True, True, True, True]]
@@ -220,9 +224,9 @@ def run(env):
                 # if j==0 or j==1:
                 #     fa[j]= bool_f
                 # print(fa)
-                print("current node ",curr_node[i],"dead_node ",dead_node)
-                if (prev_node[i] not in dead_node):
-                    print("yo") 
+                # print("current node ",curr_node[i],"dead_node ",dead_node)
+                if (curr_node[i] not in dead_node):
+                    # print("yo") 
                     action_list[i]=CR_patrol(cloud_array[curr_node[i],i],curr_node[i],env,np.array(action_list))
                 else :
                     all_routes = extract_routes()
@@ -261,7 +265,11 @@ def run(env):
     plt.xlabel('Unit Time')
     plt.ylabel('Idleness')
     plt.title('Performance')
+<<<<<<< HEAD
     plt.savefig('./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
+=======
+    plt.savefig('./data_4/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run'+str(run_id)+'.png')
+>>>>>>> ee0012c882939738aaef49973f02a4aaecbf5d10
     peaks = []
     steps = []
     node_id = 0
@@ -307,9 +315,15 @@ def extract_routes():
 if __name__ == '__main__':
     host = socket.gethostname()  # get local machine name
     port = 8060  # Make sure it's within the > 1024 $$ <65535 range
+<<<<<<< HEAD
     os.system('rm -rf ' +'./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
     os.system('mkdir '+'./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
     workbook = xlsxwriter.Workbook('./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
+=======
+    os.system('rm -rf ' +'./data_4/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    os.system('mkdir '+'./data_4/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/')
+    workbook = xlsxwriter.Workbook('./data_4/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/'+'run.xlsx')
+>>>>>>> ee0012c882939738aaef49973f02a4aaecbf5d10
     s = socket.socket()
     s.connect((host, port))
     all_routes = extract_routes()
@@ -321,7 +335,11 @@ if __name__ == '__main__':
     env=rl_env()
     run(env)
     workbook.close()
+<<<<<<< HEAD
     np.save('./check3/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/dead',dead_node)
+=======
+    np.save('./data_4/cr'+str(cars)+'/'+str(no_of_failed_devices)+'devices_failed/run'+str(run_id)+'/dead',dead_node)
+>>>>>>> ee0012c882939738aaef49973f02a4aaecbf5d10
     s.close()
 
     # startings = [all_routes.split('to')]
