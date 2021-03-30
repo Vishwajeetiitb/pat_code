@@ -64,7 +64,7 @@ for dead in deads:
 # for i in range(len(avgs)):
 # 	plt.plot(avg,carss[i], label ="no of device failures ="+str(i*2))
 # plt.errorbar(avg,cars,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
-plt.title("Idleness comparison b/w Map A and B")
+# plt.title("Idleness comparison b/w Map A and B")
 plt.ylabel("# agents")
 plt.xlabel("Graph Idleness")
 plt.legend()
