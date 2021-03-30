@@ -212,8 +212,10 @@ def run(env):
                 # print()
                 # cloud_array[prev_node[i],i,prev_node[i]]=0
                 # print(dead_node)
+                all_routes = extract_routes()
+                adj_nodes = [s.split("to")[1] for s in all_routes if s.startswith(str(c)+"to")]
                 if (curr_node[i] not in dead_node):
-                    cloud_array[:,i,curr_node[i]]=0
+                     cloud_array[adj_nodes,i,curr_node[i]]=0
                 global_idl[int(curr_node[i])]=0
                 # print('agent_', i, 'idleness:\n',idle[i].reshape(5,5))
                 # print('global idleness:\n',global_idl.reshape(5,5))
@@ -227,8 +229,6 @@ def run(env):
                     # print("yo") 
                     action_list[i]=CR_patrol(cloud_array[curr_node[i],i],curr_node[i],env,np.array(action_list))
                 else :
-                    all_routes = extract_routes()
-                    adj_nodes = [s.split("to")[1] for s in all_routes if s.startswith(str(curr_node[i])+"to")]
                     action_list[i]= int(random.choice(adj_nodes))
                 next_state, reward, action_list[i] = env.step(action_list[i], cloud_array[curr_node[i],i], i)
                 temp_n[i]=next_state

@@ -85,7 +85,6 @@ plt.savefig('./intent_asymetric_map.png', dpi = 100)
 
 # plt.legend(flip(handles, 2), flip(labels, 2), loc=9, ncol=2)
 # ax.savefig('dead'+str(dead)+'_new.png', dpi = 100)
-	
 
 
 		
