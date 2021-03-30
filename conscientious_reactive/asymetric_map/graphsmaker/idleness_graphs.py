@@ -5,9 +5,9 @@ import numpy as np
 import os
 rootdir ='../data_3_updated/'
 
-cars =  [1,2,6,10,14]
-deads = [0, 10, 14, 21, 28]
-num_runs = 2
+cars =  [1,2, 5,8,12]
+deads = [0, 4, 10, 14, 21, 28]
+num_runs = 3
 plt.figure()
 
 for dead in deads:
@@ -32,10 +32,10 @@ for dead in deads:
 		plt.plot(avg, cars, label =str(dead)+" failures")
 	plt.draw()
 
-# plt.plot(avg, cars, 'b--')
+# plt.plot(cars,avg, 'b--')
 # for i in range(len(avgs)):
-# 	plt.plot(avg, carss[i], label ="no of device failures ="+str(i*2))
-# plt.errorbar(avg, cars,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
+# 	plt.plot(cars,avgs[i], label ="no of device failures ="+str(i*2))
+# plt.errorbar(cars,avg,yerr=std,  fmt='o', ecolor='g', capthick=1.0)
 # plt.title("Map C")
 plt.ylabel("# agents")
 plt.xlabel("Graph Idleness")
