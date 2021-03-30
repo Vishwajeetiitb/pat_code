@@ -17,12 +17,13 @@ from numpy.random import default_rng
 rng = default_rng()
 cars = int(sys.argv[1])
 no_of_failed_devices = int(sys.argv[2])
+run_id = int(sys.argv[3])
 # dead_node = rng.choice([i for i in range(28)],no_of_failed_devices,replace=False)
-dead_node = [10]
+# dead_node = [10]
 dead_node = rng.choice([i for i in range(28)],no_of_failed_devices,replace=False)
 # print(dead_node)
 # dead_node = []    
-run_id = int(sys.argv[3])
+
 if 'SUMO_HOME' in os.environ:
     tools = os.path.join(os.environ['SUMO_HOME'], 'tools')
     sys.path.append(tools)

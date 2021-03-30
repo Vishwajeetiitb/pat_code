@@ -21,4 +21,4 @@ for no_agents in agents:
 			print(no_agents,'cars ',fail_no, ' devices are failed ','run id is ',str(run_id))
 			time.sleep(5)
 			os.system('python3 pat_cr_n_intent_iot_server.py '+str(no_agents)+' '+str(fail_no)+' '+str(run_id))
-			time.sleep(2)
+			time.sleep(2)	
