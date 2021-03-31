@@ -35,14 +35,15 @@
 
 <netstate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netstate_file.xsd">
     <timestep time="0.00">
-        <edge id="4to1">
-            <lane id="4to1_0">
+        <edge id="21to18">
+            <lane id="21to18_0">
                 <vehicle id="veh0" pos="12.10" speed="0.00"/>
             </lane>
-            <lane id="4to1_1"/>
+            <lane id="21to18_1"/>
         </edge>
     </timestep>
-    <timestep time="1.00">
+</netstate>
+="1.00">
         <edge id="4to1">
             <lane id="4to1_0">
                 <vehicle id="veh0" pos="13.10" speed="1.00"/>
