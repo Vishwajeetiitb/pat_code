@@ -18,7 +18,7 @@ rng = default_rng()
 cars = int(sys.argv[1])
 no_of_failed_devices = int(sys.argv[2])
 dead_node = rng.choice([i for i in range(28)],no_of_failed_devices,replace=False)
-dead_node = [10]
+# dead_node = [10]
 # print(dead_node)
 # dead_node = []    
 run_id = int(sys.argv[3])
