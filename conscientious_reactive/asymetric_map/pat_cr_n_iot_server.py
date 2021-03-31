@@ -18,6 +18,7 @@ rng = default_rng()
 cars = int(sys.argv[1])
 no_of_failed_devices = int(sys.argv[2])
 dead_node = rng.choice([i for i in range(28)],no_of_failed_devices,replace=False)
+dead_node = [10]
 # print(dead_node)
 # dead_node = []    
 run_id = int(sys.argv[3])
@@ -120,15 +121,15 @@ def CR_patrol(idle, c, env,existing_action):
     adj_nodes = [s.split("to")[1] for s in all_routes if s.startswith(str(c)+"to")]
     adj_idle = []
     # print("yo",adj_nodes,c)
-    temp_adj = np.setdiff1d(adj_nodes,existing_action)
-    if len(temp_adj)!=0:
-        for node in temp_adj:
-            adj_idle.append(idle[int(node)])
-        action_node = int(temp_adj[adj_idle.index(max(adj_idle))])
-    else:
-        for node in adj_nodes:
-            adj_idle.append(idle[int(node)])
-        action_node = int(adj_nodes[adj_idle.index(max(adj_idle))])
+    # temp_adj = np.setdiff1d(adj_nodes,existing_action)
+    # if len(temp_adj)!=0:
+    #     for node in temp_adj:
+    #         adj_idle.append(idle[int(node)])
+    #     action_node = int(temp_adj[adj_idle.index(max(adj_idle))])
+    # else:
+    for node in adj_nodes:
+        adj_idle.append(idle[int(node)])
+    action_node = int(adj_nodes[adj_idle.index(max(adj_idle))])
 
 
     return action_node
@@ -204,17 +205,13 @@ def run(env):
                 cr[i]+=prev_reward
                 #acr=cr/sumo_step
                 #print('acr: ', acr)
-                    
-
-                # print()
-                # cloud_array[prev_node[i],i,prev_node[i]]=0
-                # print(dead_node)
                 all_routes = extract_routes()
                 adj_nodes_string = [s.split("to")[1] for s in all_routes if s.startswith(str(curr_node[i])+"to")]
-                adj_nodes = [int(i) for i in adj_nodes_string]
-                if (curr_node[i] not in dead_node):
-                    cloud_array[adj_nodes,i,curr_node[i]]=0
-                global_idl[int(curr_node[i])]=0
+                adj_nodes_temp = [int(i) for i in adj_nodes_string]
+
+
+                # print()
+                
                 # print('agent_', i, 'idleness:\n',idle[i].reshape(5,5))
                 # print('global idleness:\n',global_idl.reshape(5,5))
                 # fa=[[True, True, True, True], [True, True, True, True]]
@@ -227,7 +224,18 @@ def run(env):
                     # print("yo") 
                     action_list[i]=CR_patrol(cloud_array[curr_node[i],i],curr_node[i],env,np.array(action_list))
                 else :
-                    action_list[i]= int(random.choice(adj_nodes))
+                    action_list[i]= int(random.choice(adj_nodes_temp))
+
+                cloud_array[curr_node[i],i,int(action_list[i])]=0
+                # print(dead_node)
+                adj_nodes_temp = np.setdiff1d(adj_nodes_temp,dead_node)
+                if (curr_node[i] not in dead_node):
+                    # print(adj_nodes,int(action_list[i]))
+                    cloud_array[adj_nodes_temp,i,int(action_list[i])]=0
+                global_idl[int(curr_node[i])]=0
+
+
+
                 next_state, reward, action_list[i] = env.step(action_list[i], cloud_array[curr_node[i],i], i)
                 temp_n[i]=next_state
                 # print('action: ', action, 'next_state: ', next_state, 'reward: ', reward)
