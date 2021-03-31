@@ -1,10 +1,10 @@
 import os
 import time
-agents = [1,2, 6, 10, 14]
-no_fails = [0, 4, 10, 14, 21, 28]
-# runs = 2
-# agents = [14]
-# no_fails = [10]
+# agents = [1,2, 6, 10, 14]
+# no_fails = [0, 4, 10, 14, 21, 28]
+runs = 2
+agents = [1]
+no_fails = [10]
 runs = 3
 os.system('rm -rf ./final_without_intent/')
 os.system('mkdir ./final_without_intent/')
